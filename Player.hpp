@@ -20,7 +20,7 @@ using std::vector;
 
 class Player {
 private:
-	int locationX, locationY, maxItems;
+	int xLocation, yLocation, maxItems;
 	vector <char> items;
 	bool helpOrbed;
 
@@ -86,13 +86,13 @@ public:
 	*********************************************************************/
 	int getMaxItems();
 
-	void setLocationX(int r);
+	void setXLocation(int x);
 
-	int getLocationX();
+	int getXLocation();
 
-	void setLocationY(int c);
+	void setYLocation(int y);
 
-	int getLocationY();
+	int getYLocation();
 
 	int getNumItems();
 

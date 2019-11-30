@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Implementation file for the board class. This class contains
-//integers to hold the number of locationXs, locationYumns, portals, turrets,
+//integers to hold the number of locationXs, locationYs, portals, turrets,
 //bombs, and ammo on the board. The initial number of skeletons is also
 //set. Step counters and boolean variables to tell if the player has
 //won or lost the game are also available. The board itself is a
@@ -260,11 +260,11 @@ void Board::placeBombs() {
 	}
 }
 
-void Board::useBomb(int r, int c) {
+void Board::useBomb(int x, int y) {
 	int skeletonsDestroyed = 0;
 
-	for (int i = (r - 3); i < (r + 4); i++) {
-		for (int j = (c - 3); j < (c + 4); j++) {
+	for (int i = (x - 3); i < (x + 4); i++) {
+		for (int j = (y - 3); j < (y + 4); j++) {
 			if (i > -1 && i < numRowsX && j > -1 && j < numColsY) {
 				if (gameBoard[i][j]->getSkeletonInSpace() != nullptr) {
 					delete gameBoard[i][j]->getSkeletonInSpace();
@@ -387,24 +387,24 @@ void Board::moveSkeletons(Player* p) {
 				bool alreadyOccupied = false;
 				Enemy* tempSkeleton = gameBoard[i][j]->getSkeletonInSpace();
 				tempSkeleton->move(*p);
-				int tempRow = tempSkeleton->getLocationX();
-				int tempCol = tempSkeleton->getLocationY();
+				int tempXLocation = tempSkeleton->getXLocation();
+				int tempYLocation = tempSkeleton->getYLocation();
 
 				//test to see whether it moved into another skeleton
-				if (gameBoard[tempRow][tempCol]->getSkeletonInSpace() != nullptr) {
+				if (gameBoard[tempXLocation][tempYLocation]->getSkeletonInSpace() != nullptr) {
 					alreadyOccupied = true;
 				}
 
 				//If it didn't, move the tempSkeleton to the new space, set old space skeleton pointer to null
 				if (alreadyOccupied == false) {
-					gameBoard[tempRow][tempCol]->setSkeletonInSpace(tempSkeleton);
+					gameBoard[tempXLocation][tempYLocation]->setSkeletonInSpace(tempSkeleton);
 					gameBoard[i][j]->setSkeletonInSpace(nullptr);
 				}
 
-				//If it did, reset locationX and locationY (skeleton doesn't move)
+				//If it did, reset xLocation and yLocation (skeleton doesn't move)
 				else {
-					tempSkeleton->setLocationX(i);
-					tempSkeleton->setLocationY(j);
+					tempSkeleton->setXLocation(i);
+					tempSkeleton->setYLocation(j);
 				}
 			}
 		}
@@ -446,16 +446,16 @@ void Board::placePlayer(Player* p) {
 
 					if (tempSpace == chosenSpace) {
 						//special case if this is the first time the player is being placed (not from portal)
-						if (p->getLocationY() == -1 && p->getLocationX() == -1) {
-							p->setLocationX(i);
-							p->setLocationY(j);
+						if (p->getYLocation() == -1 && p->getXLocation() == -1) {
+							p->setXLocation(i);
+							p->setYLocation(j);
 							gameBoard[i][j]->setPlayerInSpace(p);
 						}
 						//If player is coming from portal, 
 						else {
-							gameBoard[p->getLocationX()][p->getLocationY()]->setPlayerInSpace(nullptr);
-							p->setLocationX(i);
-							p->setLocationY(j);
+							gameBoard[p->getXLocation()][p->getYLocation()]->setPlayerInSpace(nullptr);
+							p->setXLocation(i);
+							p->setYLocation(j);
 							gameBoard[i][j]->setPlayerInSpace(p);
 						}
 					}
@@ -465,7 +465,7 @@ void Board::placePlayer(Player* p) {
 	}
 
 	else {
-		if (p->getLocationY() == -1 && p->getLocationX() == -1) {
+		if (p->getYLocation() == -1 && p->getXLocation() == -1) {
 			cout << "Error - invalid input conditions. No safe space to place player object to begin game.\n";
 		}
 		else {
@@ -477,8 +477,8 @@ void Board::placePlayer(Player* p) {
 void Board::movePlayer(Player* p) {
 	int direction;
 	bool validInt = false;
-	int tempRow = p->getLocationX();
-	int tempCol = p->getLocationY();
+	int tempXLocation = p->getXLocation();
+	int tempYLocation = p->getYLocation();
 
 	//output menu
 	cout << "Pick a direction to move\n";
@@ -495,43 +495,43 @@ void Board::movePlayer(Player* p) {
 		if (direction < 1 && direction > 4) {
 			cout << "Invalid input - please enter an integer between 1 and 4\n";
 		}
-		else if (direction == 1 && tempRow == 0) {
-			cout << "Invalid input - you are against the top locationX and cannot move North. Please enter a different direction\n";
+		else if (direction == 1 && tempXLocation == 0) {
+			cout << "Invalid input - you are against the top xLocation and cannot move North. Please enter a different direction\n";
 		}
-		else if (direction == 2 && tempCol == numColsY - 1) {
-			cout << "Invalid input - you are against the far right locationYumn and cannot move East. Please enter a different direction\n";
+		else if (direction == 2 && tempYLocation == numColsY - 1) {
+			cout << "Invalid input - you are against the far right locationY and cannot move East. Please enter a different direction\n";
 		}
-		else if (direction == 3 && tempRow == numRowsX - 1) {
-			cout << "Invalid input - you are against the bottom locationX and cannot move South. Please enter a different direction\n";
+		else if (direction == 3 && tempXLocation == numRowsX - 1) {
+			cout << "Invalid input - you are against the bottom xLocation and cannot move South. Please enter a different direction\n";
 		}
-		else if (direction == 4 && tempCol == 0) {
-			cout << "Invalid input - you are against the far left locationYumn and cannot move West. Please enter a different direction\n";
+		else if (direction == 4 && tempYLocation == 0) {
+			cout << "Invalid input - you are against the far left locationY and cannot move West. Please enter a different direction\n";
 		}
 		else {
 			validInt = true;
 		}
 	}
 
-	//change temp locationX and locationY based on direction
+	//change temp xLocation and yLocation based on direction
 	if (direction == 1) {
-		tempRow = tempRow - 1;
+		tempXLocation = tempXLocation - 1;
 	}
 	if (direction == 2) {
-		tempCol = tempCol + 1;
+		tempYLocation = tempYLocation + 1;
 	}
 	if (direction == 3) {
-		tempRow = tempRow + 1;
+		tempXLocation = tempXLocation + 1;
 	}
 	if (direction == 4) {
-		tempCol = tempCol - 1;
+		tempYLocation = tempYLocation - 1;
 	}
 
 	//set playerpointer in new location to player, set old pointer to null
 	if (direction != 5) {
-		gameBoard[tempRow][tempCol]->setPlayerInSpace(p);
-		gameBoard[p->getLocationX()][p->getLocationY()]->setPlayerInSpace(nullptr);
-		p->setLocationX(tempRow);
-		p->setLocationY(tempCol);
+		gameBoard[tempXLocation][tempYLocation]->setPlayerInSpace(p);
+		gameBoard[p->getXLocation()][p->getYLocation()]->setPlayerInSpace(nullptr);
+		p->setXLocation(tempXLocation);
+		p->setYLocation(tempYLocation);
 	}
 }
 
@@ -579,9 +579,9 @@ bool Board::getHasLost() {
 	return hasLost;
 }
 
-void Board::interact(int r, int c, Player* p) {
-	if (gameBoard[r][c] != nullptr) {
-		gameBoard[r][c]->interact(p, this);
+void Board::interact(int x, int y, Player* p) {
+	if (gameBoard[x][y] != nullptr) {
+		gameBoard[x][y]->interact(p, this);
 	}
 }
 

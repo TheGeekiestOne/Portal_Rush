@@ -72,7 +72,7 @@ int main() {
 
 			//if the player didn't move into an skeleton, interact with the spaces
 			if (mainBoard.getHasLost() != true) {
-				mainBoard.interact(mainPlayer.getLocationX(), mainPlayer.getLocationY(), &mainPlayer);
+				mainBoard.interact(mainPlayer.getXLocation(), mainPlayer.getYLocation(), &mainPlayer);
 			}
 
 			//move the skeletons

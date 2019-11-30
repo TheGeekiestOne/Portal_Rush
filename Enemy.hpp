@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the skeleton class. This class contains
-//ints for the locationX and locationYumn of the skeleton and a boolean variable to
+//ints for the xLocation and locationY of the skeleton and a boolean variable to
 //say whether the skeleton has moved.
  
 #ifndef ENEMY_HPP
@@ -13,16 +13,16 @@
 
 class Enemy {
 private:
-	int locationX;
-	int locationY;
+	int xLocation;
+	int yLocation;
 	bool hasMoved;
 
 public:
 	 
-	//Constructor for the skeleton class. Row and locationYumn values are required
+	//Constructor for the skeleton class. Row and locationY values are required
 	//to initialize the object.
 	 
-	Enemy(int r, int c);
+	Enemy(int x, int y);
 
 	 
 	//Takes a player as a parameter and moves the skeleton one space closer
@@ -34,13 +34,13 @@ public:
 	 
 	//Getters and setters for the member variables.
 	 
-	int getLocationX();
+	int getXLocation();
 
-	void setLocationX(int r);
+	void setXLocation(int x);
 
-	int getLocationY();
+	int getYLocation();
 
-	void setLocationY(int c);
+	void setYLocation(int y);
 
 	bool getHasMoved();
 

@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the board class. This class contains
-//integers to hold the number of locationXs, locationYumns, portals, turrets,
+//integers to hold the number of locationXs, locationY s, portals, turrets,
 //bombs, and ammo on the board. The initial number of skeletons is also
 //set. Step counters and boolean variables to tell if the player has
 //won or lost the game are also available. The board itself is a
@@ -60,10 +60,10 @@ public:
 	void placeBombs();
 
 	/*********************************************************************
-	//Destroys all skeletons in a 7x7 grid centered on the locationX input r and
-	//locationYumn input c.
+	//Destroys all skeletons in a 7x7 grid centered on the xLocation input x and
+	//locationY input c.
 	*********************************************************************/
-	void useBomb(int r, int c);
+	void useBomb(int x, int y);
 
 	/*********************************************************************
 	//Randomly changes the hasItem and item member variables of one of the
@@ -132,7 +132,7 @@ public:
 	/*********************************************************************
 	//Calls the interact function of the space the player is situated on
 	*********************************************************************/
-	void interact(int r, int c, Player* p);
+	void interact(int x, int y, Player* p);
 
 	/*********************************************************************
 	//Loops through the board, calling the print function for each space

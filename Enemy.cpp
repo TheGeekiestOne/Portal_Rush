@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Implementation file for the skeleton class. This class contains
-//ints for the locationX and locationYumn of the skeleton and a boolean variable to
+//ints for the xLocation and locationY of the skeleton and a boolean variable to
 //say whether the skeleton has moved. Function descriptions are available
 //in the header file.
  
@@ -14,94 +14,94 @@
 
 using std::rand;
 
-Enemy::Enemy(int r, int c) {
-	locationX = r;
-	locationY = c;
+Enemy::Enemy(int x, int y) {
+	xLocation = x;
+	yLocation = y;
 	hasMoved = false;
 }
 
 void Enemy::move(Player& p) {
-	if (p.getLocationX() == locationX && p.getLocationY() < locationY) {
-		locationY -= 1;
+	if (p.getXLocation() == xLocation && p.getYLocation() < yLocation) {
+		yLocation -= 1;
 	}
 
-	else if (p.getLocationX() == locationX && p.getLocationY() > locationY) {
-		locationY += 1;
+	else if (p.getXLocation() == xLocation && p.getYLocation() > yLocation) {
+		yLocation += 1;
 	}
 
-	else if (p.getLocationX() < locationX && p.getLocationY() == locationY) {
-		locationX -= 1;
+	else if (p.getXLocation() < xLocation && p.getYLocation() == yLocation) {
+		xLocation -= 1;
 	}
 
-	else if (p.getLocationX() > locationX&& p.getLocationY() == locationY) {
-		locationX += 1;
+	else if (p.getXLocation() > xLocation&& p.getYLocation() == yLocation) {
+		xLocation += 1;
 	}
 
-	else if (p.getLocationX() < locationX && p.getLocationY() < locationY) {
+	else if (p.getXLocation() < xLocation && p.getYLocation() < yLocation) {
 		int moveDirection = rand() % 2;
 
 		if (moveDirection == 0) {
-			locationX -= 1;
+			xLocation -= 1;
 		}
 
 		else {
-			locationY -= 1;
+			yLocation -= 1;
 		}
 	}
 
-	else if (p.getLocationX() < locationX && p.getLocationY() > locationY) {
+	else if (p.getXLocation() < xLocation && p.getYLocation() > yLocation) {
 		int moveDirection = rand() % 2;
 
 		if (moveDirection == 0) {
-			locationX -= 1;
+			xLocation -= 1;
 		}
 
 		else {
-			locationY += 1;
+			yLocation += 1;
 		}
 	}
 
-	else if (p.getLocationX() > locationX&& p.getLocationY() < locationY) {
+	else if (p.getXLocation() > xLocation&& p.getYLocation() < yLocation) {
 		int moveDirection = rand() % 2;
 
 		if (moveDirection == 0) {
-			locationX += 1;
+			xLocation += 1;
 		}
 
 		else {
-			locationY -= 1;
+			yLocation -= 1;
 		}
 	}
 
-	else if (p.getLocationX() > locationX&& p.getLocationY() > locationY) {
+	else if (p.getXLocation() > xLocation&& p.getYLocation() > yLocation) {
 		int moveDirection = rand() % 2;
 
 		if (moveDirection == 0) {
-			locationX += 1;
+			xLocation += 1;
 		}
 
 		else {
-			locationY += 1;
+			yLocation += 1;
 		}
 	}
 
 	hasMoved = true;
 }
 
-int Enemy::getLocationX() {
-	return locationX;
+int Enemy::getXLocation() {
+	return xLocation;
 }
 
-void Enemy::setLocationX(int r) {
-	locationX = r;
+void Enemy::setXLocation(int x) {
+	xLocation = x;
 }
 
-int Enemy::getLocationY() {
-	return locationY;
+int Enemy::getYLocation() {
+	return yLocation;
 }
 
-void Enemy::setLocationY(int c) {
-	locationY = c;
+void Enemy::setYLocation(int y) {
+	yLocation = y;
 }
 
 bool Enemy::getHasMoved() {

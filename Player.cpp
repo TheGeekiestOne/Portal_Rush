@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the Player class. Contains integers
-//for the locationX and locationY location, and max number of items. Also
+//for the xLocation and yLocation location, and max number of items. Also
 //has a vector container to hold items and a boolean to determine if
 //help has been orbed for. Functions to pick up, discard, and use
 //items are available. Function definitions in header file.
@@ -20,8 +20,8 @@ using std::vector;
 using std::cout;
 
 Player::Player() {
-	locationX = -1;
-	locationY = -1;
+	xLocation = -1;
+	yLocation = -1;
 	maxItems = 10;
 	helpOrbed = false;
 }
@@ -30,20 +30,20 @@ int Player::getMaxItems() {
 	return maxItems;
 }
 
-void Player::setLocationX(int r) {
-	locationX = r;
+void Player::setXLocation(int x) {
+	xLocation = x;
 }
 
-int Player::getLocationX() {
-	return locationX;
+int Player::getXLocation() {
+	return xLocation;
 }
 
-void Player::setLocationY(int c) {
-	locationY = c;
+void Player::setYLocation(int y) {
+	yLocation = y;
 }
 
-int Player::getLocationY() {
-	return locationY;
+int Player::getYLocation() {
+	return yLocation;
 }
 
 bool Player::useItem(Board& b) {
@@ -267,7 +267,7 @@ void Player::useBomb(Board& b) {
 	this->discardBomb();
 
 	//call a board function to calculate what is destroyed
-	b.useBomb(locationX, locationY);
+	b.useBomb(xLocation, yLocation);
 }
 
 bool Player::holdingAmmo() {
