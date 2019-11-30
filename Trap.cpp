@@ -1,13 +1,11 @@
- 
-//Program name: Trap.cpp
+ //Program name: Trap.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Implementation file for the Trap class. This class
 //derives from the Space class. Interacting with this class involves
 //picking a direction and destroying all skeletons in that direction
 //(provided ammo is remaining in the turret). Function definitions
-//available in header file.
- 
+//available in header file. 
 
 #include "Space.hpp"
 #include "Trap.hpp"

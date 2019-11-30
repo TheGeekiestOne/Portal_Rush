@@ -1,9 +1,7 @@
- 
-//Program name: InputValidator.cpp
+ //Program name: InputValidator.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Implementation file for input validation functions
- 
 
 #include <iostream>
 #include <sstream>
@@ -15,11 +13,9 @@ using std::cout;
 using std::getline;
 using std::stringstream;
 
- 
 //Takes a reference to an int as a parameter. The function then gets
 //input from the user and attempts to validate it. The function will
 //continue to get input until a valid int is entered.
- 
 void getValidInt(int& input) {
 	//initialize variables
 	bool whileBool = false;
@@ -59,11 +55,9 @@ void getValidInt(int& input) {
 	}
 }
 
- 
 //Takes a reference to a double as a parameter. The function then gets
 //input from the user and attempts to validate it. The function will
 //continue to get input until a valid double is entered.
- 
 void getValidDouble(double& input) {
 	bool whileBool = false;
 	char tempChar;
@@ -96,11 +90,9 @@ void getValidDouble(double& input) {
 	}
 }
 
- 
 //Takes a reference to a char as a parameter. The function then gets
 //input from the user and attempts to validate it. The function will
 //continue to get input until a valid char is entered.
- 
 void getValidChar(char& input) {
 	bool whileBool = false;
 	char tempChar;
@@ -132,11 +124,9 @@ void getValidChar(char& input) {
 	}
 }
 
- 
 //Takes a reference to a string as a parameter. The function then gets
 //input from the user and attempts to validate it. The function will
 //continue to get input until a valid line is entered.
- 
 void getValidLine(string& input) {
 	bool whileBool = false;
 	string tempString;
@@ -166,12 +156,10 @@ void getValidLine(string& input) {
 		}
 	}
 }
-
  
 //Takes a reference to a string as a parameter. The function then gets
 //input from the user and attempts to validate it. The function will
-//continue to get input until a valid line is entered.
- 
+//continue to get input until a valid line is entered 
 void getAlphaString(string& input) {
 	bool whileBool = false;
 	string tempString;

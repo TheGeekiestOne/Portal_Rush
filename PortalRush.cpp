@@ -12,7 +12,6 @@
 //to initialize the board, play the game, add skeletons each turn, and draw
 //outcomes based on progress made at the time of victory or defeat.
  
-
 #include "Enemy.hpp"
 #include "Player.hpp"
 #include "Space.hpp"

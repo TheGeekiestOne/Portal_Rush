@@ -1,5 +1,4 @@
- 
-//Program name: Portal.cpp
+ //Program name: Portal.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the Portal class. This class
@@ -7,7 +6,6 @@
 //asking the player if they would like to activate the portal. If
 //they do, they are randomly placed on a space with no adjacent
 //skeletons. Function definitions available in the header file.
- 
 
 #include "Space.hpp"
 #include "Portal.hpp"

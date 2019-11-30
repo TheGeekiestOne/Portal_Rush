@@ -1,4 +1,3 @@
-/*********************************************************************
 //Program name: Space.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
@@ -10,7 +9,6 @@
 //functions to interact, draw, and return the space type. All other
 //member functions are getters and setters. Function explanations
 //available in header file.
-*********************************************************************/
 
 #include "Space.hpp"
 #include "Player.hpp"

@@ -1,5 +1,4 @@
- 
-//Program name: FreeSpace.cpp
+ //Program name: FreeSpace.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the FreeSpace class. This class
@@ -7,7 +6,6 @@
 //picking up an item if the space contains one, or nothing if the
 //space does not contain an item. Function definitions available in
 //header file.
- 
 
 #include "Space.hpp"
 #include "FreeSpace.hpp"

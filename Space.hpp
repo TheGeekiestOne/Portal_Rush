@@ -1,5 +1,4 @@
- 
-//Program name: Space.hpp
+ //Program name: Space.hpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the Space class. This is the base
@@ -9,7 +8,6 @@
 //player or skeleton objects that may occupy the space. Contains virtual
 //functions to interact, draw, and return the space type. All other
 //member functions are getters and setters.
- 
 
 #ifndef SPACE_HPP
 #define SPACE_HPP
@@ -33,12 +31,9 @@ protected:
 public:
 	 
 	//Default constructor, sets all pointers to null and hasItem to false.
-	 
 	Space();
 
-	 
 	//Setters and getters
-	 
 	void setNorth(Space* s);
 
 	Space* getNorth();
@@ -70,25 +65,17 @@ public:
 	void setSkeletonInSpace(Enemy* a);
 
 	Enemy* getSkeletonInSpace();
-
 	 
 	//Pure virtual function to interact
-	 
 	virtual void interact(Player* p, Board* b) = 0;
-
 	 
 	//Pure virtual function to draw
-	 
 	virtual void draw() = 0;
-
 	 
 	//Pure virtual function to return the space type
-	 
 	virtual char getSpaceType() = 0;
-
 	 
 	//Virtual destructor. Needed to correctly delete derived classes.
-	 
 	virtual ~Space();
 };
 

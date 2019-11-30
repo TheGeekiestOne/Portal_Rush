@@ -1,5 +1,4 @@
- 
-//Program name: FreeSpace.hpp
+ //Program name: FreeSpace.hpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the FreeSpace class. This class
@@ -17,23 +16,16 @@
 class FreeSpace : public Space {
 public:
 	 
-	//Default constructor, does nothing for this class.
-	 
+	//Default constructor, does nothing for this class. 
 	FreeSpace();
-
-	 
+ 
 	//If hasItem == true, gives the player the option to pick up the item.
-	 
 	void interact(Player* p, Board* b);
 
-	 
-	//Prints the space based on the values shown in the legend.
-	 
+	//Prints the space based on the values shown in the legend. 
 	void draw();
-
-	 
+ 
 	//returns 'n' for normal
-	 
 	char getSpaceType();
 };
 

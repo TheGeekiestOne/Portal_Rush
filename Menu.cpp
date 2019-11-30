@@ -1,11 +1,9 @@
- 
-//Program name: Menu.cpp
+ //Program name: Menu.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the instructions functions. These
 //functions simply draw the scenario, instructions, and legend for
 //the game. Function definitions are available in the header file.
- 
 
 #include "Menu.hpp"
 #include <iostream>

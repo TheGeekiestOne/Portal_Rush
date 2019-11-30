@@ -1,5 +1,4 @@
- 
-//Program name: Trap.hpp
+ //Program name: Trap.hpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the Trap class. This class
@@ -22,23 +21,16 @@ private:
 public:
 	 
 	//Default constructor, sets ammo to 5
-	 
 	Trap();
-
-	 
+ 
 	//If ammo > 0, gets and validates a direction to fire. Deletes all
 	//skeletons in chosen direction, reduces ammo by 1.
-	 
 	void interact(Player* p, Board* b);
-
 	 
 	//Prints the space based on the values shown in the legend.
-	 
 	void draw();
 
-	 
 	//returns 't' for turret
-	 
 	char getSpaceType();
 };
 

@@ -1,5 +1,4 @@
- 
-//Program name: Board.cpp
+ //Program name: Board.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Implementation file for the board class. This class contains
@@ -9,7 +8,6 @@
 //won or lost the game are also available. The board itself is a
 //space triple pointer called gameBoard. Function definitions are
 //available in the header file.
- 
 
 #include "Board.hpp"
 #include "Space.hpp"

@@ -1,4 +1,3 @@
-
 //Program name: Player.hpp
 //Author: Ayran Olckers
 //Date: 20/11/2019

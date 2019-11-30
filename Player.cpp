@@ -1,5 +1,4 @@
- 
-//Program name: Player.cpp
+ //Program name: Player.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the Player class. Contains integers
@@ -7,7 +6,6 @@
 //has a vector container to hold items and a boolean to determine if
 //help has been orbed for. Functions to pick up, discard, and use
 //items are available. Function definitions in header file.
- 
 
 #include "Player.hpp"
 #include "InputValidator.hpp"
