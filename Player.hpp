@@ -1,5 +1,5 @@
 //Program name: Player.hpp
-//Author: Ayran Olckers
+//Grand Creator: Ayran Olckers
 //Date: 20/11/2019
 //
 //Description: 
