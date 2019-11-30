@@ -3,7 +3,7 @@
 //Date: 20/11/2019
 //
 //Description: 
-//Implementation file for the Space class. This is the base class for the three space types that appear on the gameBoard. It
+//Implementation file for the Space class. This is the base class for the three space types that appear on the gameBoardLayout. It
 //contains pointers to the North, East, South, and West spaces around the space, boolean and char variables for items, and pointers to
 //player or skeleton objects that may occupy the space. Contains virtual functions to interact, draw, and return the space type. All other
 //member functions are getters and setters.
@@ -18,8 +18,8 @@ Space::Space() {
 	south = nullptr;
 	west = nullptr;
 	hasItem = false;
-	playerInSpace = nullptr;
-	skeletonInSpace = nullptr;
+	playerInTile = nullptr;
+	skeletonInTile = nullptr;
 }
 
 void Space::setNorth(Space* s) {
@@ -70,20 +70,20 @@ char Space::getItem() {
 	return item;
 }
 
-void Space::setPlayerInSpace(Player* p) {
-	playerInSpace = p;
+void Space::setPlayerInTile(Player* p) {
+	playerInTile = p;
 }
 
-Player* Space::getPlayerInSpace() {
-	return playerInSpace;
+Player* Space::getPlayerInTile() {
+	return playerInTile;
 }
 
-void Space::setSkeletonInSpace(Enemy* a) {
-	skeletonInSpace = a;
+void Space::setSkeletonInTile(Enemy* a) {
+	skeletonInTile = a;
 }
 
-Enemy* Space::getSkeletonInSpace() {
-	return skeletonInSpace;
+Enemy* Space::getSkeletonInTile() {
+	return skeletonInTile;
 }
 
 Space::~Space() {}

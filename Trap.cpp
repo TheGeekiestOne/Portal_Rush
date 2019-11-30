@@ -72,9 +72,9 @@ void Trap::interact(Player* p, Board* b) {
 				//loop until the edge of the board is reached
 				while (tempSpace != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInSpace() != nullptr) {
-						delete tempSpace->getSkeletonInSpace();
-						tempSpace->setSkeletonInSpace(nullptr);
+					if (tempSpace->getSkeletonInTile() != nullptr) {
+						delete tempSpace->getSkeletonInTile();
+						tempSpace->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
@@ -86,9 +86,9 @@ void Trap::interact(Player* p, Board* b) {
 				//loop until the edge of the board is reached
 				while (tempSpace != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInSpace() != nullptr) {
-						delete tempSpace->getSkeletonInSpace();
-						tempSpace->setSkeletonInSpace(nullptr);
+					if (tempSpace->getSkeletonInTile() != nullptr) {
+						delete tempSpace->getSkeletonInTile();
+						tempSpace->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
@@ -100,9 +100,9 @@ void Trap::interact(Player* p, Board* b) {
 				//loop until the edge of the board is reached
 				while (tempSpace != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInSpace() != nullptr) {
-						delete tempSpace->getSkeletonInSpace();
-						tempSpace->setSkeletonInSpace(nullptr);
+					if (tempSpace->getSkeletonInTile() != nullptr) {
+						delete tempSpace->getSkeletonInTile();
+						tempSpace->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
@@ -114,9 +114,9 @@ void Trap::interact(Player* p, Board* b) {
 				//loop until the edge of the board is reached
 				while (tempSpace != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInSpace() != nullptr) {
-						delete tempSpace->getSkeletonInSpace();
-						tempSpace->setSkeletonInSpace(nullptr);
+					if (tempSpace->getSkeletonInTile() != nullptr) {
+						delete tempSpace->getSkeletonInTile();
+						tempSpace->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
@@ -143,15 +143,15 @@ void Trap::interact(Player* p, Board* b) {
 }
 
 void Trap::draw() {
-	if (playerInSpace != nullptr && skeletonInSpace != nullptr) {
+	if (playerInTile != nullptr && skeletonInTile != nullptr) {
 		cout << "!";
 	}
 
-	else if (playerInSpace != nullptr) {
+	else if (playerInTile != nullptr) {
 		cout << "\x1B[93mX\033[0m\n";
 	}
 
-	else if (skeletonInSpace != nullptr) {
+	else if (skeletonInTile != nullptr) {
 		cout << "^";
 	}
 

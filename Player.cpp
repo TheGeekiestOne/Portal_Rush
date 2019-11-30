@@ -199,9 +199,9 @@ void Player::useBow(Board& b) {
 		//loop until the edge of the board is reached, or skeleton is destroyed
 		while (tempSpace != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInSpace() != nullptr) {
-				delete tempSpace->getSkeletonInSpace();
-				tempSpace->setSkeletonInSpace(nullptr);
+			if (tempSpace->getSkeletonInTile() != nullptr) {
+				delete tempSpace->getSkeletonInTile();
+				tempSpace->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
@@ -213,9 +213,9 @@ void Player::useBow(Board& b) {
 		//loop until the edge of the board is reached
 		while (tempSpace != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInSpace() != nullptr) {
-				delete tempSpace->getSkeletonInSpace();
-				tempSpace->setSkeletonInSpace(nullptr);
+			if (tempSpace->getSkeletonInTile() != nullptr) {
+				delete tempSpace->getSkeletonInTile();
+				tempSpace->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
@@ -227,9 +227,9 @@ void Player::useBow(Board& b) {
 		//loop until the edge of the board is reached
 		while (tempSpace != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInSpace() != nullptr) {
-				delete tempSpace->getSkeletonInSpace();
-				tempSpace->setSkeletonInSpace(nullptr);
+			if (tempSpace->getSkeletonInTile() != nullptr) {
+				delete tempSpace->getSkeletonInTile();
+				tempSpace->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
@@ -241,9 +241,9 @@ void Player::useBow(Board& b) {
 		//loop until the edge of the board is reached
 		while (tempSpace != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInSpace() != nullptr) {
-				delete tempSpace->getSkeletonInSpace();
-				tempSpace->setSkeletonInSpace(nullptr);
+			if (tempSpace->getSkeletonInTile() != nullptr) {
+				delete tempSpace->getSkeletonInTile();
+				tempSpace->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 

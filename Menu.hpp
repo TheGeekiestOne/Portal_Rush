@@ -11,7 +11,7 @@
 //Prints the motivation and backstory for the game. Explains the mechanics and how to win.
 void printIntro();
  
-//Prints the legend for reading the gameBoard.
+//Prints the legend for reading the gameBoardLayout.
 void printInstructions();
 
 #endif

@@ -5,7 +5,7 @@
 //Description: 
 //Implementation file for the board class. This class contains integers to hold the number of locationXs, locationYs, portals, turrets,
 //grenades, and ammo on the board. The initial number of skeletons is also set. Step counters and boolean variables to tell if the player has
-//won or lost the game are also available. The board itself is a space triple pointer called gameBoard.
+//won or lost the game are also available. The board itself is a space triple pointer called gameBoardLayout.
 
 #include "Board.hpp"
 #include "Space.hpp"
@@ -37,15 +37,15 @@ Board::Board(Player* p) {
 
 
 	//initialize all of the tiles
-	gameBoard = new Space * *[numRowsX];
+	gameBoardLayout = new Space * *[numRowsX];
 	for (int i = 0; i < numRowsX; i++) {
-		gameBoard[i] = new Space * [numColsY];
+		gameBoardLayout[i] = new Space * [numColsY];
 	}
 
 	//set the tiles equal to null
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			gameBoard[i][j] = nullptr;
+			gameBoardLayout[i][j] = nullptr;
 		}
 	}
 
@@ -60,8 +60,8 @@ Board::Board(Player* p) {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j] == nullptr) {
-				gameBoard[i][j] = new FreeSpace;
+			if (gameBoardLayout[i][j] == nullptr) {
+				gameBoardLayout[i][j] = new FreeSpace;
 			}
 		}
 	}
@@ -71,62 +71,62 @@ Board::Board(Player* p) {
 		for (int j = 0; j < numColsY; j++) {
 			//top left corner
 			if (i == 0 && j == 0) {
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
 			}
 
 			//top right corner
 			else if (i == 0 && j == numColsY - 1) {
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
 			//top border
 			else if (i == 0) {
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
 			//bottom left corner
 			else if (i == numRowsX - 1 && j == 0) {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
 			}
 
 			//bottom right corner
 			else if (i == numRowsX - 1 && j == numColsY - 1) {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
 			//bottom border
 			else if (i == numRowsX - 1) {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
 			//left border
 			else if (j == 0) {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
 			}
 
 			//right border
 			else if (j == numColsY - 1) {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
 			//all interior spaces
 			else {
-				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
+				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
+				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
+				gameBoardLayout[i][j]->setSouth(gameBoardLayout[i + 1][j]);
+				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 		}
 	}
@@ -159,7 +159,7 @@ void Board::placePortal() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j] == nullptr) {
+			if (gameBoardLayout[i][j] == nullptr) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -170,11 +170,11 @@ void Board::placePortal() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j] == nullptr) {
+				if (gameBoardLayout[i][j] == nullptr) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
-						gameBoard[i][j] = new Portal;
+						gameBoardLayout[i][j] = new Portal;
 					}
 				}
 			}
@@ -190,7 +190,7 @@ void Board::placeTrap() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j] == nullptr) {
+			if (gameBoardLayout[i][j] == nullptr) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -201,11 +201,11 @@ void Board::placeTrap() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j] == nullptr) {
+				if (gameBoardLayout[i][j] == nullptr) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
-						gameBoard[i][j] = new Trap;
+						gameBoardLayout[i][j] = new Trap;
 					}
 				}
 			}
@@ -221,7 +221,7 @@ void Board::placeGrenades() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -232,12 +232,12 @@ void Board::placeGrenades() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
-						gameBoard[i][j]->setHasItem(true);
-						gameBoard[i][j]->setItem('b');
+						gameBoardLayout[i][j]->setHasItem(true);
+						gameBoardLayout[i][j]->setItem('b');
 					}
 				}
 			}
@@ -252,9 +252,9 @@ void Board::useGrenade(int x, int y) {
 	for (int i = (x - 3); i < (x + 4); i++) {
 		for (int j = (y - 3); j < (y + 4); j++) {
 			if (i > -1 && i < numRowsX && j > -1 && j < numColsY) {
-				if (gameBoard[i][j]->getSkeletonInSpace() != nullptr) {
-					delete gameBoard[i][j]->getSkeletonInSpace();
-					gameBoard[i][j]->setSkeletonInSpace(nullptr);
+				if (gameBoardLayout[i][j]->getSkeletonInTile() != nullptr) {
+					delete gameBoardLayout[i][j]->getSkeletonInTile();
+					gameBoardLayout[i][j]->setSkeletonInTile(nullptr);
 					skeletonsDestroyed += 1;
 				}
 			}
@@ -280,7 +280,7 @@ void Board::placeAmmo() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -291,12 +291,12 @@ void Board::placeAmmo() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
-						gameBoard[i][j]->setHasItem(true);
-						gameBoard[i][j]->setItem('a');
+						gameBoardLayout[i][j]->setHasItem(true);
+						gameBoardLayout[i][j]->setItem('a');
 					}
 				}
 			}
@@ -312,7 +312,7 @@ void Board::placeOrb() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -323,12 +323,12 @@ void Board::placeOrb() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j]->getSpaceType() == 'n' && gameBoard[i][j]->getHasItem() == false) {
+				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
-						gameBoard[i][j]->setHasItem(true);
-						gameBoard[i][j]->setItem('r');
+						gameBoardLayout[i][j]->setHasItem(true);
+						gameBoardLayout[i][j]->setItem('r');
 					}
 				}
 			}
@@ -344,7 +344,7 @@ void Board::placeSkeleton() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getPlayerInSpace() == nullptr) {
+			if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getPlayerInTile() == nullptr) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -355,12 +355,12 @@ void Board::placeSkeleton() {
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoard[i][j]->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getPlayerInSpace() == nullptr) {
+				if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getPlayerInTile() == nullptr) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
 						Enemy* tempSkeleton = new Enemy(i, j);
-						gameBoard[i][j]->setSkeletonInSpace(tempSkeleton);
+						gameBoardLayout[i][j]->setSkeletonInTile(tempSkeleton);
 					}
 				}
 			}
@@ -372,23 +372,23 @@ void Board::placeSkeleton() {
 void Board::moveSkeletons(Player* p) {
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr && gameBoard[i][j]->getSkeletonInSpace()->getHasMoved() == false) {
+			if (gameBoardLayout[i][j]->getSkeletonInTile() != nullptr && gameBoardLayout[i][j]->getSkeletonInTile()->getHasMoved() == false) {
 				//Create a temp skeleton variable, move it
 				bool alreadyOccupied = false;
-				Enemy* tempSkeleton = gameBoard[i][j]->getSkeletonInSpace();
+				Enemy* tempSkeleton = gameBoardLayout[i][j]->getSkeletonInTile();
 				tempSkeleton->move(*p);
 				int tempXLocation = tempSkeleton->getXLocation();
 				int tempYLocation = tempSkeleton->getYLocation();
 
 				//test to see whether it moved into another skeleton
-				if (gameBoard[tempXLocation][tempYLocation]->getSkeletonInSpace() != nullptr) {
+				if (gameBoardLayout[tempXLocation][tempYLocation]->getSkeletonInTile() != nullptr) {
 					alreadyOccupied = true;
 				}
 
 				//If it didn't, move the tempSkeleton to the new space, set old space skeleton pointer to null
 				if (alreadyOccupied == false) {
-					gameBoard[tempXLocation][tempYLocation]->setSkeletonInSpace(tempSkeleton);
-					gameBoard[i][j]->setSkeletonInSpace(nullptr);
+					gameBoardLayout[tempXLocation][tempYLocation]->setSkeletonInTile(tempSkeleton);
+					gameBoardLayout[i][j]->setSkeletonInTile(nullptr);
 				}
 
 				//If it did, reset xLocation and yLocation (skeleton doesn't move)
@@ -403,8 +403,8 @@ void Board::moveSkeletons(Player* p) {
 	//reset hasMoved after looping through the whole board
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr) {
-				gameBoard[i][j]->getSkeletonInSpace()->setHasMoved(false);
+			if (gameBoardLayout[i][j]->getSkeletonInTile() != nullptr) {
+				gameBoardLayout[i][j]->getSkeletonInTile()->setHasMoved(false);
 			}
 		}
 	}
@@ -418,8 +418,8 @@ void Board::placePlayer(Player* p) {
 	//loop through the interior spaces, find one that is not on or adjacent to an skeleton
 	for (int i = 1; i < numRowsX - 1; i++) {
 		for (int j = 1; j < numColsY - 1; j++) {
-			if (gameBoard[i][j]->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getNorth()->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getEast()->getSkeletonInSpace() == nullptr
-				&& gameBoard[i][j]->getSouth()->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getWest()->getSkeletonInSpace() == nullptr) {
+			if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getNorth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getEast()->getSkeletonInTile() == nullptr
+				&& gameBoardLayout[i][j]->getSouth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getWest()->getSkeletonInTile() == nullptr) {
 				eligibleSpaces += 1;
 			}
 		}
@@ -430,8 +430,8 @@ void Board::placePlayer(Player* p) {
 
 		for (int i = 1; i < numRowsX - 1; i++) {
 			for (int j = 1; j < numColsY - 1; j++) {
-				if (gameBoard[i][j]->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getNorth()->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getEast()->getSkeletonInSpace() == nullptr
-					&& gameBoard[i][j]->getSouth()->getSkeletonInSpace() == nullptr && gameBoard[i][j]->getWest()->getSkeletonInSpace() == nullptr) {
+				if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getNorth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getEast()->getSkeletonInTile() == nullptr
+					&& gameBoardLayout[i][j]->getSouth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getWest()->getSkeletonInTile() == nullptr) {
 					tempSpace += 1;
 
 					if (tempSpace == chosenSpace) {
@@ -439,14 +439,14 @@ void Board::placePlayer(Player* p) {
 						if (p->getYLocation() == -1 && p->getXLocation() == -1) {
 							p->setXLocation(i);
 							p->setYLocation(j);
-							gameBoard[i][j]->setPlayerInSpace(p);
+							gameBoardLayout[i][j]->setPlayerInTile(p);
 						}
 						//If player is coming from portal, 
 						else {
-							gameBoard[p->getXLocation()][p->getYLocation()]->setPlayerInSpace(nullptr);
+							gameBoardLayout[p->getXLocation()][p->getYLocation()]->setPlayerInTile(nullptr);
 							p->setXLocation(i);
 							p->setYLocation(j);
-							gameBoard[i][j]->setPlayerInSpace(p);
+							gameBoardLayout[i][j]->setPlayerInTile(p);
 						}
 					}
 				}
@@ -519,8 +519,8 @@ void Board::movePlayer(Player* p) {
 
 	//set playerpointer in new location to player, set old pointer to null
 	if (direction != 5) {
-		gameBoard[tempXLocation][tempYLocation]->setPlayerInSpace(p);
-		gameBoard[p->getXLocation()][p->getYLocation()]->setPlayerInSpace(nullptr);
+		gameBoardLayout[tempXLocation][tempYLocation]->setPlayerInTile(p);
+		gameBoardLayout[p->getXLocation()][p->getYLocation()]->setPlayerInTile(nullptr);
 		p->setXLocation(tempXLocation);
 		p->setYLocation(tempYLocation);
 	}
@@ -530,8 +530,8 @@ Space* Board::getPlayerSpace() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getPlayerInSpace() != nullptr) {
-				return gameBoard[i][j];
+			if (gameBoardLayout[i][j]->getPlayerInTile() != nullptr) {
+				return gameBoardLayout[i][j];
 			}
 		}
 	}
@@ -571,8 +571,8 @@ bool Board::getHasLost() {
 }
 
 void Board::interact(int x, int y, Player* p) {
-	if (gameBoard[x][y] != nullptr) {
-		gameBoard[x][y]->interact(p, this);
+	if (gameBoardLayout[x][y] != nullptr) {
+		gameBoardLayout[x][y]->interact(p, this);
 	}
 }
 
@@ -588,8 +588,8 @@ void Board::printBoard() {
 	for (int i = 0; i < numRowsX; i++) {
 		cout << "\x1B[93m|\033[0m";
 		for (int j = 0; j < numColsY; j++) {
-			gameBoard[i][j]->draw();
-			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr && gameBoard[i][j]->getPlayerInSpace() != nullptr) {
+			gameBoardLayout[i][j]->draw();
+			if (gameBoardLayout[i][j]->getSkeletonInTile() != nullptr && gameBoardLayout[i][j]->getPlayerInTile() != nullptr) {
 				hasLost = true;
 			}
 		}
@@ -606,15 +606,15 @@ void Board::printBoard() {
 Board::~Board() {
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr) {
-				delete gameBoard[i][j]->getSkeletonInSpace();
+			if (gameBoardLayout[i][j]->getSkeletonInTile() != nullptr) {
+				delete gameBoardLayout[i][j]->getSkeletonInTile();
 			}
-			delete gameBoard[i][j];
+			delete gameBoardLayout[i][j];
 		}
 	}
 
 	for (int i = 0; i < numRowsX; i++) {
-		delete[]gameBoard[i];
+		delete[]gameBoardLayout[i];
 	}
-	delete[]gameBoard;
+	delete[]gameBoardLayout;
 }

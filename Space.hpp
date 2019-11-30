@@ -3,7 +3,7 @@
 //Date: 20/11/2019
 //
 //Description: 
-//Header file for the Space class. This is the base class for the three space types that appear on the gameBoard. It
+//Header file for the Space class. This is the base class for the three space types that appear on the gameBoardLayout. It
 //contains pointers to the North, East, South, and West spaces around the space, boolean and char variables for items, and pointers to
 //player or skeleton objects that may occupy the space. Contains virtual functions to interact, draw, and return the space type. All other
 //member functions are getters and setters.
@@ -24,8 +24,8 @@ protected:
 	Space * west;
 	bool hasItem;
 	char item;
-	Player * playerInSpace;
-	Enemy * skeletonInSpace;
+	Player * playerInTile;
+	Enemy * skeletonInTile;
 
 public:
 	 
@@ -51,11 +51,11 @@ public:
 	void setItem(char c);
 	char getItem();
 
-	void setPlayerInSpace(Player* p);
-	Player* getPlayerInSpace();
+	void setPlayerInTile(Player* p);
+	Player* getPlayerInTile();
 
-	void setSkeletonInSpace(Enemy* a);
-	Enemy* getSkeletonInSpace();
+	void setSkeletonInTile(Enemy* a);
+	Enemy* getSkeletonInTile();
 	 
 	//Pure virtual function to interact
 	virtual void interact(Player* p, Board* b) = 0;

@@ -42,15 +42,15 @@ void Portal::interact(Player* p, Board* b) {
 }
 
 void Portal::draw() {
-	if (playerInSpace != nullptr && skeletonInSpace != nullptr) {
+	if (playerInTile != nullptr && skeletonInTile != nullptr) {
 		cout << "!";
 	}
 
-	else if (playerInSpace != nullptr) {
+	else if (playerInTile != nullptr) {
 		cout << "X";
 	}
 
-	else if (skeletonInSpace != nullptr) {
+	else if (skeletonInTile != nullptr) {
 		cout << "^";
 	}
 
