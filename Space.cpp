@@ -7,7 +7,7 @@
 //contains pointers to the North, East, South, and West spaces around
 //the space, boolean and char variables for items, and pointers to
 //player or skeleton objects that may occupy the space. Contains virtual
-//functions to interact, print, and return the space type. All other
+//functions to interact, draw, and return the space type. All other
 //member functions are getters and setters. Function explanations
 //available in header file.
 *********************************************************************/

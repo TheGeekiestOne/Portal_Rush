@@ -145,13 +145,13 @@ void Trap::interact(Player* p, Board* b) {
 	}
 }
 
-void Trap::print() {
+void Trap::draw() {
 	if (playerInSpace != nullptr && skeletonInSpace != nullptr) {
 		cout << "!";
 	}
 
 	else if (playerInSpace != nullptr) {
-		cout << "X";
+		cout << "\x1B[93mX\033[0m\n";
 	}
 
 	else if (skeletonInSpace != nullptr) {

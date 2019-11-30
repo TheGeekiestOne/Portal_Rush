@@ -132,17 +132,17 @@ void FreeSpace::interact(Player* p, Board* b) {
 	}
 }
 
-void FreeSpace::print() {
+void FreeSpace::draw() {
 	if (playerInSpace != nullptr && skeletonInSpace != nullptr) {
 		cout << "!";
 	}
 
 	else if (playerInSpace != nullptr) {
-		cout << "X";
+		cout << "\x1B[105mX\033[0m";
 	}
 
 	else if (skeletonInSpace != nullptr) {
-		cout << "^";
+		cout << "\x1B[92m^\033[0m";
 	}
 
 	else if (hasItem == false) {
@@ -162,7 +162,7 @@ void FreeSpace::print() {
 	}
 
 	else {
-		cout << "Error in FreeSpace::print()";
+		cout << "Error in FreeSpace::draw()";
 	}
 }
 

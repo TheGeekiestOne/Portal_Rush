@@ -586,18 +586,18 @@ void Board::interact(int x, int y, Player* p) {
 }
 
 void Board::printBoard() {
-	//print top border
+	//draw top border
 	cout << endl;
 	for (int i = 0; i < numRowsX + 2; i++) {
 		cout << "-";
 	}
 	cout << endl;
 
-	//print edges and interior spaces
+	//draw edges and interior spaces
 	for (int i = 0; i < numRowsX; i++) {
 		cout << "|";
 		for (int j = 0; j < numColsY; j++) {
-			gameBoard[i][j]->print();
+			gameBoard[i][j]->draw();
 			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr && gameBoard[i][j]->getPlayerInSpace() != nullptr) {
 				hasLost = true;
 			}
@@ -605,7 +605,7 @@ void Board::printBoard() {
 		cout << "|\n";
 	}
 
-	//print bottom border
+	//draw bottom border
 	for (int i = 0; i < numRowsX + 2; i++) {
 		cout << "-";
 	}

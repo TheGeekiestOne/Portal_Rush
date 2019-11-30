@@ -7,7 +7,7 @@
 //contains pointers to the North, East, South, and West spaces around
 //the space, boolean and char variables for items, and pointers to
 //player or skeleton objects that may occupy the space. Contains virtual
-//functions to interact, print, and return the space type. All other
+//functions to interact, draw, and return the space type. All other
 //member functions are getters and setters.
  
 
@@ -77,9 +77,9 @@ public:
 	virtual void interact(Player* p, Board* b) = 0;
 
 	 
-	//Pure virtual function to print
+	//Pure virtual function to draw
 	 
-	virtual void print() = 0;
+	virtual void draw() = 0;
 
 	 
 	//Pure virtual function to return the space type

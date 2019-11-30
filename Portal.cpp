@@ -44,7 +44,7 @@ void Portal::interact(Player* p, Board* b) {
 	}
 }
 
-void Portal::print() {
+void Portal::draw() {
 	if (playerInSpace != nullptr && skeletonInSpace != nullptr) {
 		cout << "!";
 	}
@@ -58,7 +58,7 @@ void Portal::print() {
 	}
 
 	else {
-		cout << "O";
+		cout << "\x1B[94mO\033[0m";
 	}
 }
 

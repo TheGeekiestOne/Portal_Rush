@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the instructions functions. These
-//functions simply print the scenario, instructions, and legend for
+//functions simply draw the scenario, instructions, and legend for
 //the game. Function definitions are available in the header file.
  
 
@@ -25,7 +25,7 @@ void printIntro() {
 	cout << "\x1B[32m	_|        _|    _|  _|          _|      _|    _|  _|      _|    _|  _|    _|      _|_|  _|    _|  \033[0m\t\t\n";
 	cout << "\x1B[32m	_|          _|_|    _|            _|_|    _|_|_|  _|      _|    _|    _|_|_|  _|_|_|    _|    _|  \033[0m\t\t\n";
 
-	cout << "Created by \x1B[31m Ayran Olckers \033[0m\t\t\n";
+	cout << "Created by \x1B[41m Ayran Olckers \033[0m\t\t\n";
 	
 	cout << "You are a hunter trapped in a dead world.\n";
 	cout << "You are been attaked by the undead and are the only one living. You are armed\n";
@@ -50,7 +50,7 @@ void printLegend() {
 
 	cout << "INSTRUCTIONS:\n";
 	cout << "================================\n";
-	cout << "X - Player\n";
+	cout << "\x1B[105mX\033[0m - Player\n";
 	cout << "^ - Enemy\n";
 	cout << "T - Trap/Turret\n";
 	cout << "O - Portal\n";

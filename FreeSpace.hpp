@@ -29,7 +29,7 @@ public:
 	 
 	//Prints the space based on the values shown in the legend.
 	 
-	void print();
+	void draw();
 
 	 
 	//returns 'n' for normal

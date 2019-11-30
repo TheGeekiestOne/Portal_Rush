@@ -9,7 +9,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Main function for the skeleton survival game. Calls functions
-//to initialize the board, play the game, add skeletons each turn, and print
+//to initialize the board, play the game, add skeletons each turn, and draw
 //outcomes based on progress made at the time of victory or defeat.
  
 
@@ -52,7 +52,7 @@ int main() {
 	printLegend();
 
 	while (mainBoard.getHasLost() != true && mainBoard.getHasWon() != true) {
-		//print game status
+		//draw game status
 		if (mainPlayer.getHelpOrbed() == false) {
 			cout << mainBoard.getStepsLose() << " turns remain before the skeleton invasion is complete.\n";
 			cout << "Orb has not been used.\n";
@@ -62,12 +62,12 @@ int main() {
 			cout << "The orb has been used and the world will be saved in " << mainBoard.getStepsWin() << " turns.\n";
 		}
 
-		//print the board
+		//draw the board
 		mainBoard.printBoard();
 
 		//continue as long as an skeleton has not moved into the player
 		if (mainBoard.getHasLost() != true) {
-			//use items, print the board if a bomb or bow was used
+			//use items, draw the board if a bomb or bow was used
 			boardChanged = mainPlayer.useItem(mainBoard);
 			if (boardChanged == true) {
 				mainBoard.printBoard();
@@ -95,7 +95,7 @@ int main() {
 				mainBoard.reduceStepsWin();
 			}
 
-			//print the final board if the player won on this turn
+			//draw the final board if the player won on this turn
 			if (mainBoard.getHasWon() == true) {
 				mainBoard.printBoard();
 			}

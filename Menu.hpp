@@ -3,7 +3,7 @@
 //Author: Ayran Olckers
 //Date: 20/11/2019
 //Description: Header file for the instructions functions. These
-//functions simply print the scenario, instructions, and legend for
+//functions simply draw the scenario, instructions, and legend for
 //the game.
  
 
