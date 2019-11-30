@@ -1,10 +1,10 @@
  //Program name: FreeSpace.hpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Header file for the FreeSpace class. This class
-//derives from the Space class. Interacting with this class involves
-//picking up an item if the space contains one, or nothing if the
-//space does not contain an item.
+//
+//Description: 
+//Header file for the FreeSpace class. This class derives from the Space class. Interacting with this class involves
+//picking up an item if the space contains one, or nothing if the space does not contain an item.
  
 
 #ifndef FREESPACE_HPP

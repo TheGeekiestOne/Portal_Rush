@@ -1,11 +1,11 @@
  //Program name: Player.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Header file for the Player class. Contains integers
-//for the xLocation and yLocation location, and max number of items. Also
-//has a vector container to hold items and a boolean to determine if
-//help has been orbed for. Functions to pick up, discard, and use
-//items are available. Function definitions in header file.
+//
+//Description: 
+//Header file for the Player class. Contains integers for the xLocation and yLocation location, and max number of items. Also
+//has a vector container to hold items and a boolean to determine if help has been orbed for. Functions to pick up, discard, and use
+//items are available.
 
 #include "Player.hpp"
 #include "InputValidator.hpp"
@@ -54,7 +54,7 @@ bool Player::useItem(Board& b) {
 		return false;
 	}
 	else if (items.size() == 1 && items[0] == 'r' && helpOrbed == true) {
-		cout << "You are only holding theorb.\n";
+		cout << "You are only holding the orb.\n";
 	}
 	else {
 		cout << "Would you like to use an item?\n";
@@ -95,7 +95,7 @@ bool Player::useItem(Board& b) {
 				return true;
 			}
 			else if (itemUsed == 'b') {
-				this->useBomb(b);
+				this->useGrenade(b);
 				return true;
 			}
 		}
@@ -106,7 +106,7 @@ bool Player::useItem(Board& b) {
 char Player::printPickItems() {
 	char itemToUse;
 	bool validChar = false;
-	int numBombs = 0;
+	int numGrenades = 0;
 	int numAmmo = 0;
 	bool holdingOrb = false;
 
@@ -115,14 +115,14 @@ char Player::printPickItems() {
 			numAmmo += 1;
 		}
 		else if (items[i] == 'b') {
-			numBombs += 1;
+			numGrenades += 1;
 		}
 		else if (items[i] == 'r') {
 			holdingOrb = true;
 		}
 	}
 
-	cout << "You have " << numBombs << " bombs left, " << numAmmo << " bow ammo left, and are";
+	cout << "You have " << numGrenades << " grenades left, " << numAmmo << " bow ammo left, and are";
 
 	if (holdingOrb == false) {
 		cout << " not";
@@ -137,7 +137,7 @@ char Player::printPickItems() {
 		cout << "You have not yet called for help with the orb.\n";
 	}
 
-	cout << "Please choose which item to use. Enter 'r' to use the orb, 'a' to use the bow, 'b' to use a bomb,\n";
+	cout << "Please choose which item to use. Enter 'r' to use the orb, 'a' to use the bow, 'b' to use a grenade,\n";
 	cout << "or 'n' to not use any items.\n";
 
 	while (validChar == false) {
@@ -146,8 +146,8 @@ char Player::printPickItems() {
 		if (itemToUse == 'a' && numAmmo == 0) {
 			cout << "Invalid selection - no bow ammo remaining\n";
 		}
-		else if (itemToUse == 'b' && numBombs == 0) {
-			cout << "Invalid selection - no bombs remaining\n";
+		else if (itemToUse == 'b' && numGrenades == 0) {
+			cout << "Invalid selection - no grenades remaining\n";
 		}
 		else if (itemToUse == 'r' && holdingOrb == false) {
 			cout << "Invalid selection - you are not holding the orb\n";
@@ -260,12 +260,12 @@ void Player::useBow(Board& b) {
 	}
 }
 
-void Player::useBomb(Board& b) {
+void Player::useGrenade(Board& b) {
 	//remove 1 ammo
-	this->discardBomb();
+	this->discardGrenade();
 
 	//call a board function to calculate what is destroyed
-	b.useBomb(xLocation, yLocation);
+	b.useGrenade(xLocation, yLocation);
 }
 
 bool Player::holdingAmmo() {
@@ -281,18 +281,18 @@ bool Player::holdingAmmo() {
 	return ammoExists;
 }
 
-bool Player::holdingBomb() {
-	bool bombExists = false;
+bool Player::holdingGrenade() {
+	bool grenadeExists = false;
 
 	if (items.empty() == false) {
 		for (int i = 0; i < items.size(); i++) {
 			if (items[i] == 'b') {
-				bombExists = true;
+				grenadeExists = true;
 			}
 		}
 	}
 
-	return bombExists;
+	return grenadeExists;
 }
 
 void Player::addItem(char c) {
@@ -300,7 +300,7 @@ void Player::addItem(char c) {
 	cout << "You are now holding " << items.size() << " items out of a maximum of " << maxItems << " items.\n";
 }
 
-void Player::discardBomb() {
+void Player::discardGrenade() {
 	bool itemDiscarded = false;
 
 	for (int i = 0; i < items.size(); i++) {

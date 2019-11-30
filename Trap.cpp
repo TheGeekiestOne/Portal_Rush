@@ -1,11 +1,10 @@
  //Program name: Trap.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Implementation file for the Trap class. This class
-//derives from the Space class. Interacting with this class involves
-//picking a direction and destroying all skeletons in that direction
-//(provided ammo is remaining in the turret). Function definitions
-//available in header file. 
+//
+//Description: 
+//Implementation file for the Trap class. This class derives from the Space class. Interacting with this class involves
+//picking a direction and destroying all skeletons in that direction (provided ammo is remaining in the turret).
 
 #include "Space.hpp"
 #include "Trap.hpp"
@@ -22,21 +21,21 @@ Trap::Trap() {
 }
 
 void Trap::interact(Player* p, Board* b) {
-	int activateTurret;
+	int activateTrap;
 	int direction;
 	int skeletonsDestroyed = 0;
 	bool validInt = false;
 	Space* tempSpace = this;
 
 	if (ammo > 0) {
-		cout << "The turret has " << ammo << " ammo left. Would you like to use it?\n";
+		cout << "The turret has " << ammo << " bolts left. Would you like to use it?\n";
 		cout << "1. Yes\n";
 		cout << "2. No\n";
 
 		while (validInt == false) {
-			getValidInt(activateTurret);
+			getValidInt(activateTrap);
 
-			if (activateTurret < 1 || activateTurret > 2) {
+			if (activateTrap < 1 || activateTrap > 2) {
 				cout << "Invalid input - please enter 1 or 2\n";
 			}
 
@@ -47,7 +46,7 @@ void Trap::interact(Player* p, Board* b) {
 
 		validInt = false;
 
-		if (activateTurret == 1) {
+		if (activateTrap == 1) {
 			ammo -= 1;
 
 			cout << "Please select a direction to fire\n";
@@ -127,19 +126,19 @@ void Trap::interact(Player* p, Board* b) {
 			}
 
 			if (skeletonsDestroyed == 1) {
-				cout << "The   turret destroyed " << skeletonsDestroyed << " skeleton.\n";
+				cout << "The turret destroyed " << skeletonsDestroyed << " skeleton.\n";
 			}
 			else if (skeletonsDestroyed > 1) {
-				cout << "The   turret destroyed " << skeletonsDestroyed << " skeletons.\n";
+				cout << "The turret destroyed " << skeletonsDestroyed << " skeletons.\n";
 			}
 			else {
-				cout << "The   turret missed.\n";
+				cout << "The turret missed.\n";
 			}
 		}
 	}
 
 	else {
-		cout << "The turret is out of ammo.\n";
+		cout << "The turret is out of bolts.\n";
 	}
 }
 

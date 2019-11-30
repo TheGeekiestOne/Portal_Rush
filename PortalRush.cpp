@@ -8,11 +8,12 @@
 //Program name: Main.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Main function for the skeleton survival game. Calls functions
-//to initialize the board, play the game, add skeletons each turn, and draw
+//
+//Description: 
+//Main function for the skeleton survival game. Calls functions to initialize the board, play the game, add skeletons each turn, and draw
 //outcomes based on progress made at the time of victory or defeat.
  
-#include "Enemy.hpp"
+#include "Enemy.hpp"		
 #include "Player.hpp"
 #include "Space.hpp"
 #include "FreeSpace.hpp"
@@ -26,6 +27,7 @@
 #include <string>
 #include <cstdlib>
 
+//cut down on typing -
 using std::vector;
 using std::string;
 using std::getline;
@@ -35,8 +37,7 @@ using std::endl;
 using std::rand;
 using std::srand;
 
-
-
+//the main method for the game, 
 int main() {
 	//seed rand
 	srand(time(nullptr));
@@ -48,25 +49,25 @@ int main() {
 
 	//Welcome the player to the game
 	printIntro();
-	printLegend();
+	printInstructions();
 
 	while (mainBoard.getHasLost() != true && mainBoard.getHasWon() != true) {
 		//draw game status
 		if (mainPlayer.getHelpOrbed() == false) {
-			cout << mainBoard.getStepsLose() << " turns remain before the skeleton invasion is complete.\n";
-			cout << "Orb has not been used.\n";
+			cout << mainBoard.getStepsLose() << " turns remaining before the skeletons win.\n";
+			cout << "The Orb has not been used yet.\n";
 		}
 		else {
-			cout << mainBoard.getStepsLose() << " turns remain before the skeleton invasion is complete.\n";
-			cout << "The orb has been used and the world will be saved in " << mainBoard.getStepsWin() << " turns.\n";
+			cout << mainBoard.getStepsLose() << " turns remain before the skeleton win.\n";
+			cout << "The orb has been used!!! the world will be saved in " << mainBoard.getStepsWin() << " turns. Hazzah\n";
 		}
 
 		//draw the board
 		mainBoard.printBoard();
 
-		//continue as long as an skeleton has not moved into the player
+		//this will continue as long as a skeleton has not moved into the player tile
 		if (mainBoard.getHasLost() != true) {
-			//use items, draw the board if a bomb or bow was used
+			//use items, draw the board if a grenade or bow was used from the player
 			boardChanged = mainPlayer.useItem(mainBoard);
 			if (boardChanged == true) {
 				mainBoard.printBoard();
@@ -75,7 +76,7 @@ int main() {
 			//move the player
 			mainBoard.movePlayer(&mainPlayer);
 
-			//if the player didn't move into an skeleton, interact with the spaces
+			//if the player didn't move into a skeleton, interact with the tile
 			if (mainBoard.getHasLost() != true) {
 				mainBoard.interact(mainPlayer.getXLocation(), mainPlayer.getYLocation(), &mainPlayer);
 			}
@@ -83,7 +84,7 @@ int main() {
 			//move the skeletons
 			mainBoard.moveSkeletons(&mainPlayer);
 
-			//add an skeleton
+			//add a skeleton
 			mainBoard.placeSkeleton();
 
 			//reduce the time limit
@@ -102,21 +103,19 @@ int main() {
 	}
 
 	if (mainBoard.getHasLost() == true && mainBoard.getHasWon() == true) {
-		cout << "Help arrived right as the skeletons got to you. While you were not saved, your valiant actions allowed the \n";
-		cout << "forces of heaven to respond to the skeleton threat in time to stop it. Game over.\n";
+		cout << "Help arrived right as the skeletons got to you.\n";
 	}
 
 	else if (mainBoard.getHasLost() == true && mainBoard.getStepsWin() < 10) {
-		cout << "Unfortunately, you were defeated before the forces of Heaven could get to the skeletons. However, your valiant actions\n";
-		cout << "to activate the orb and call the forces of Heaven allowed them to respond in time to stop the invasion. Game over.\n";
+		cout << "Unfortunately, you were defeated before the forces of Heaven could get to the skeletons.\n";
 	}
 
 	else if (mainBoard.getHasLost() == true) {
-		cout << "Unfortunately, you were defeated before the forces of Heaven could get to the skeletons. Game over.\n";
+		cout << "Unfortunately, you were defeated. Game over.\n";
 	}
 
 	else if (mainBoard.getHasWon() == true) {
-		cout << "Help has arrived! Your orb call has saved the workd from the skeleton invasion. Game over.\n";
+		cout << "Help has arrived! The activation of the orb has saved the workd from the skeletons. The End.\n";
 	}
 
 	//let the user read the output and choose when to leave

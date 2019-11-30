@@ -1,9 +1,9 @@
  //Program name: Menu.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Header file for the instructions functions. These
-//functions simply draw the scenario, instructions, and legend for
-//the game. Function definitions are available in the header file.
+//
+//Description: 
+//Header file for the instructions functions. These functions simply draw the scenario, instructions, and legend for the game.
 
 #include "Menu.hpp"
 #include <iostream>
@@ -35,7 +35,7 @@ void printIntro() {
 
 	cout << "The invasion is still ongoing, with more undead arriving constantly. However, you\n";
 	cout << "can stop the invasion by finding an orb, that wins the game.\n";
-	cout << "You need to act quickly, as the invasion will completely destroy the world in 300 turns.\n";
+	cout << "You need to act quickly, as the invasion will completely destroy the world in 100 turns.\n";
 	cout << "You must use all of your resources and skills to accomplish this task!\n\n";
 
 	//cout << "GOOD LUCK, and May the Force be with you!\n\n";
@@ -43,14 +43,14 @@ void printIntro() {
 
 
 
-void printLegend() {
+void printInstructions() {
 	string dummyString;
 
 	cout << "INSTRUCTIONS:\n";
 	cout << "================================\n";
 	cout << "\x1B[105mX\033[0m - Player\n";
 	cout << "^ - Enemy\n";
-	cout << "T - Trap/Turret\n";
+	cout << "T - Trap/Trap\n";
 	cout << "O - Portal\n";
 	cout << ". - Ammo\n";
 	cout << "& - Grenade\n";

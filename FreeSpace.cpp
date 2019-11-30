@@ -1,11 +1,10 @@
  //Program name: FreeSpace.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Header file for the FreeSpace class. This class
-//derives from the Space class. Interacting with this class involves
-//picking up an item if the space contains one, or nothing if the
-//space does not contain an item. Function definitions available in
-//header file.
+//
+//Description: 
+//Header file for the FreeSpace class. This class derives from the Space class. Interacting with this class involves
+//picking up an item if the space contains one, or nothing if the space does not contain an item.
 
 #include "Space.hpp"
 #include "FreeSpace.hpp"
@@ -49,10 +48,10 @@ void FreeSpace::interact(Player* p, Board* b) {
 		int pickItem;
 		bool validInt = false;
 
-		if (p->holdingAmmo() == true and p->holdingBomb() == true) {
+		if (p->holdingAmmo() == true and p->holdingGrenade() == true) {
 			cout << "Maximum item capacity has been reached. Would you like to discard an item and take this one?\n";
 			cout << "1. Yes, discard ammo\n";
-			cout << "2. Yes, discard bomb\n";
+			cout << "2. Yes, discard grenade\n";
 			cout << "3. No\n";
 
 			while (validInt == false) {
@@ -74,7 +73,7 @@ void FreeSpace::interact(Player* p, Board* b) {
 			}
 
 			else if (pickItem == 2) {
-				p->discardBomb();
+				p->discardGrenade();
 				p->addItem(item);
 				hasItem = false;
 			}
@@ -106,7 +105,7 @@ void FreeSpace::interact(Player* p, Board* b) {
 
 		else {
 			cout << "Maximum item capacity has been reached. Would you like to discard an item and take this one?\n";
-			cout << "1. Yes, discard bomb\n";
+			cout << "1. Yes, discard grenade\n";
 			cout << "2. No\n";
 
 			while (validInt == false) {
@@ -122,7 +121,7 @@ void FreeSpace::interact(Player* p, Board* b) {
 			}
 
 			if (pickItem == 1) {
-				p->discardBomb();
+				p->discardGrenade();
 				p->addItem(item);
 				hasItem = false;
 			}

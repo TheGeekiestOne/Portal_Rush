@@ -1,7 +1,9 @@
  //Program name: InputValidator.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Implementation file for input validation functions
+//
+//Description: 
+//Implementation file for input validation functions
 
 #include <iostream>
 #include <sstream>
@@ -13,9 +15,7 @@ using std::cout;
 using std::getline;
 using std::stringstream;
 
-//Takes a reference to an int as a parameter. The function then gets
-//input from the user and attempts to validate it. The function will
-//continue to get input until a valid int is entered.
+//Takes a reference to an int as a parameter.
 void getValidInt(int& input) {
 	//initialize variables
 	bool whileBool = false;
@@ -32,32 +32,28 @@ void getValidInt(int& input) {
 		//attempt to move to input
 		cinBuffer >> input;
 
-		//Fail if there is an invalid character in front.
+		//Fail if there is an invalid character
 		if (cinBuffer.fail()) {
-			cout << "Invalid input - do not spell out the number or verify it is less than overflow.\n";
-			cout << "Please re-enter the desired integer:\n";
+			cout << "Invalid input - Please re-enter the desired integer:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
-		//Fail if there is an invalid character behind
+		//Fail if there is an invalid character
 		else if (cinBuffer >> tempChar) {
-			cout << "Invalid input - please do not enter any characters (including '.') or spaces after the desired integer.\n";
-			cout << "Please re-enter the desired integer:\n";
+			cout << "Invalid input - Please re-enter the desired integer:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
-		//Continue if everything checks out
+		//Continue if everything else
 		else {
 			whileBool = true;
 		}
 	}
 }
 
-//Takes a reference to a double as a parameter. The function then gets
-//input from the user and attempts to validate it. The function will
-//continue to get input until a valid double is entered.
+//Takes a reference to a double as a parameter.
 void getValidDouble(double& input) {
 	bool whileBool = false;
 	char tempChar;
@@ -71,15 +67,13 @@ void getValidDouble(double& input) {
 		cinBuffer >> input;
 
 		if (cinBuffer.fail()) {
-			cout << "Invalid input - please do not spell out the number or verify it less than overflow.\n";
-			cout << "Please re-enter the desired double:\n";
+			cout << "Invalid input - Please re-enter the desired double:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
 		else if (cinBuffer >> tempChar) {
-			cout << "Invalid input - please do not enter any characters or spaces after the desired double.\n";
-			cout << "Please re-enter the desired double:\n";
+			cout << "Invalid input - Please re-enter the desired double:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
@@ -90,9 +84,7 @@ void getValidDouble(double& input) {
 	}
 }
 
-//Takes a reference to a char as a parameter. The function then gets
-//input from the user and attempts to validate it. The function will
-//continue to get input until a valid char is entered.
+//Takes a reference to a char as a parameter.
 void getValidChar(char& input) {
 	bool whileBool = false;
 	char tempChar;
@@ -105,15 +97,13 @@ void getValidChar(char& input) {
 
 		cinBuffer >> input;
 		if (cin.fail()) {
-			cout << "Invalid input - please enter a valid char.";
-			cout << "Please re-enter the desired character:\n";
+			cout << "Invalid input - Please re-enter the desired character:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
 		else if (cinBuffer >> tempChar) {
-			cout << "Invalid input - please do not enter any characters or spaces after the desired character.\n";
-			cout << "Please re-enter the desired character:\n";
+			cout << "Invalid input - Please re-enter the desired character:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
@@ -124,8 +114,7 @@ void getValidChar(char& input) {
 	}
 }
 
-//Takes a reference to a string as a parameter. The function then gets
-//input from the user and attempts to validate it. The function will
+//Takes a reference to a string as a parameter. The function then gets input from the user and attempts to validate it. The function will
 //continue to get input until a valid line is entered.
 void getValidLine(string& input) {
 	bool whileBool = false;
@@ -138,15 +127,13 @@ void getValidLine(string& input) {
 
 		cinBuffer >> input;
 		if (cin.fail()) {
-			cout << "Invalid input - please enter a valid string.";
-			cout << "Please re-enter the desired string:\n";
+			cout << "Invalid input - Please re-enter the desired string:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
 		else if (input.length() == 0) {
-			cout << "Invalid input - please enter at least one character.\n";
-			cout << "Please re-enter the desired string:\n";
+			cout << "Invalid input - Please re-enter the desired string:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
@@ -157,9 +144,7 @@ void getValidLine(string& input) {
 	}
 }
  
-//Takes a reference to a string as a parameter. The function then gets
-//input from the user and attempts to validate it. The function will
-//continue to get input until a valid line is entered 
+//Takes a reference to a string as a parameter. 
 void getAlphaString(string& input) {
 	bool whileBool = false;
 	string tempString;
@@ -172,22 +157,19 @@ void getAlphaString(string& input) {
 
 		cinBuffer >> input;
 		if (cin.fail()) {
-			cout << "Invalid input - please enter a valid string.";
-			cout << "Please re-enter the desired string:\n";
+			cout << "Invalid input - Please re-enter the desired string:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
 		else if (input.length() == 0) {
-			cout << "Invalid input - please enter at least one character.\n";
-			cout << "Please re-enter the desired string:\n";
+			cout << "Invalid input - Please re-enter the desired string:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}
 
 		else if (cinBuffer >> tempChar) {
-			cout << "Invalid input - please do not enter any spaces after the desired palindrome input.\n";
-			cout << "Please re-enter the desired string:\n";
+			cout << "Invalid input - Please re-enter the desired string:\n";
 			cinBuffer.clear();
 			cinBuffer.str("");
 		}

@@ -1,13 +1,11 @@
  //Program name: Board.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Implementation file for the board class. This class contains
-//integers to hold the number of locationXs, locationYs, portals, turrets,
-//bombs, and ammo on the board. The initial number of skeletons is also
-//set. Step counters and boolean variables to tell if the player has
-//won or lost the game are also available. The board itself is a
-//space triple pointer called gameBoard. Function definitions are
-//available in the header file.
+//
+//Description: 
+//Implementation file for the board class. This class contains integers to hold the number of locationXs, locationYs, portals, turrets,
+//grenades, and ammo on the board. The initial number of skeletons is also set. Step counters and boolean variables to tell if the player has
+//won or lost the game are also available. The board itself is a space triple pointer called gameBoard.
 
 #include "Board.hpp"
 #include "Space.hpp"
@@ -25,38 +23,38 @@ using std::endl;
 using std::rand;
 
 Board::Board(Player* p) {
-	numRowsX = 20;
-	numColsY = 20;
-	numPortals = 10;
-	numTurrets = 10;
-	numBombs = 15;
-	numAmmo = 25;
-	numSkeletons = 7;
-	stepsLose = 300;
-	stepsWin = 11;
+	numRowsX = 20;		// number of rows(X)
+	numColsY = 20;		// nuumber on colums(Y) 
+	numPortals = 10;	//
+	numTraps = 10;	//
+	numGrenades = 15;	//
+	numAmmo = 25;		//
+	numSkeletons = 7;	// start amount of enemies
+	stepsLose = 100;	//Turns until loss
+	stepsWin = 10;		// once orb is used, turns until win
 	hasWon = false;
 	hasLost = false;
 
 
-	//initialize all of the spaces
+	//initialize all of the tiles
 	gameBoard = new Space * *[numRowsX];
 	for (int i = 0; i < numRowsX; i++) {
 		gameBoard[i] = new Space * [numColsY];
 	}
 
-	//set the spaces equal to null
+	//set the tiles equal to null
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
 			gameBoard[i][j] = nullptr;
 		}
 	}
 
-	//Reassign the spaces appropriately
+	//Reassign the tiles appropriately
 	for (int i = 0; i < numPortals; i++) {
-		this->placeTurret();
+		this->placeTrap();
 	}
 
-	for (int i = 0; i < numTurrets; i++) {
+	for (int i = 0; i < numTraps; i++) {
 		this->placePortal();
 	}
 
@@ -68,28 +66,23 @@ Board::Board(Player* p) {
 		}
 	}
 
-	//Set NESW pointers for the spaces
+	//Set NESW pointers for the tiles
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
 			//top left corner
 			if (i == 0 && j == 0) {
-				//gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
 				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
 				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				//gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
 			//top right corner
 			else if (i == 0 && j == numColsY - 1) {
-				//gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				//gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
 				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
 				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
 			//top border
 			else if (i == 0) {
-				//gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
 				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
 				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
 				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
@@ -99,15 +92,11 @@ Board::Board(Player* p) {
 			else if (i == numRowsX - 1 && j == 0) {
 				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
 				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				//gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				//gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
 			//bottom right corner
 			else if (i == numRowsX - 1 && j == numColsY - 1) {
 				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				//gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				//gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
 				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
@@ -115,7 +104,6 @@ Board::Board(Player* p) {
 			else if (i == numRowsX - 1) {
 				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
 				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
-				//gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
 				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
@@ -124,13 +112,11 @@ Board::Board(Player* p) {
 				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
 				gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
 				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
-				//gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
 
 			//right border
 			else if (j == numColsY - 1) {
 				gameBoard[i][j]->setNorth(gameBoard[i - 1][j]);
-				//gameBoard[i][j]->setEast(gameBoard[i][j + 1]);
 				gameBoard[i][j]->setSouth(gameBoard[i + 1][j]);
 				gameBoard[i][j]->setWest(gameBoard[i][j - 1]);
 			}
@@ -145,9 +131,9 @@ Board::Board(Player* p) {
 		}
 	}
 
-	//Distribute items
-	for (int i = 0; i < numBombs; i++) {
-		this->placeBombs();
+	//Distribute items to the tiles
+	for (int i = 0; i < numGrenades; i++) {
+		this->placeGrenades();
 	}
 
 	for (int i = 0; i < numAmmo; i++) {
@@ -156,17 +142,16 @@ Board::Board(Player* p) {
 
 	this->placeOrb();
 
-	//place skeletons
+	//place skeletons randomly on the tiles
 	for (int i = 0; i < numSkeletons; i++) {
 		this->placeSkeleton();
 	}
 
-	//place player
+	//place player randomly to a tile
 	this->placePlayer(p);
 }
 
-//Board::Board(Player p, int locationXs, int locationYs, int portals, int turrets, int bombs, int ammo, int skeletons) { }
-
+//place the portals on the tiles
 void Board::placePortal() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
@@ -197,7 +182,8 @@ void Board::placePortal() {
 	}
 }
 
-void Board::placeTurret() {
+//place the traps/turrets to the tiles
+void Board::placeTrap() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
 	int tempSpace = 0;
@@ -227,7 +213,8 @@ void Board::placeTurret() {
 	}
 }
 
-void Board::placeBombs() {
+//place pickeup grenade to rand tiles
+void Board::placeGrenades() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
 	int tempSpace = 0;
@@ -258,7 +245,8 @@ void Board::placeBombs() {
 	}
 }
 
-void Board::useBomb(int x, int y) {
+//when grenade is used, assign the effect to the tiles, delete enemies if inside the radius
+void Board::useGrenade(int x, int y) {
 	int skeletonsDestroyed = 0;
 
 	for (int i = (x - 3); i < (x + 4); i++) {
@@ -274,16 +262,17 @@ void Board::useBomb(int x, int y) {
 	}
 
 	if (skeletonsDestroyed == 1) {
-		cout << "The bomb destroyed " << skeletonsDestroyed << " skeleton.\n";
+		cout << "The grenade destroyed " << skeletonsDestroyed << " skeleton.\n"; //if 1 skeleton was destroyed
 	}
 	else if (skeletonsDestroyed > 1) {
-		cout << "The bomb destroyed " << skeletonsDestroyed << " skeletons.\n";
+		cout << "The grenade destroyed " << skeletonsDestroyed << " skeletons.\n"; //is more than 1 skeleton was destryoed
 	}
 	else {
-		cout << "The bomb missed.\n";
+		cout << "The grenade missed.\n"; // if not skeleton destroyed
 	}
 }
 
+//place ammo randomly on the tiles
 void Board::placeAmmo() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
@@ -315,6 +304,7 @@ void Board::placeAmmo() {
 	}
 }
 
+//place the orba at a random location
 void Board::placeOrb() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
@@ -346,6 +336,7 @@ void Board::placeOrb() {
 	}
 }
 
+//place enemies at random locations
 void Board::placeSkeleton() {
 	int eligibleSpaces = 0;
 	int chosenSpace;
@@ -377,6 +368,7 @@ void Board::placeSkeleton() {
 	}
 }
 
+//u[date the move of the enemies towars the player
 void Board::moveSkeletons(Player* p) {
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
@@ -472,6 +464,7 @@ void Board::placePlayer(Player* p) {
 	}
 }
 
+//update player being moved to tiles
 void Board::movePlayer(Player* p) {
 	int direction;
 	bool validInt = false;
@@ -587,25 +580,25 @@ void Board::printBoard() {
 	//draw top border
 	cout << endl;
 	for (int i = 0; i < numRowsX + 2; i++) {
-		cout << "-";
+		cout << "\x1B[93m-\033[0m";
 	}
 	cout << endl;
 
 	//draw edges and interior spaces
 	for (int i = 0; i < numRowsX; i++) {
-		cout << "|";
+		cout << "\x1B[93m|\033[0m";
 		for (int j = 0; j < numColsY; j++) {
 			gameBoard[i][j]->draw();
 			if (gameBoard[i][j]->getSkeletonInSpace() != nullptr && gameBoard[i][j]->getPlayerInSpace() != nullptr) {
 				hasLost = true;
 			}
 		}
-		cout << "|\n";
+		cout << "\x1B[93m|\033[0m\n";
 	}
 
 	//draw bottom border
 	for (int i = 0; i < numRowsX + 2; i++) {
-		cout << "-";
+		cout << "\x1B[93m-\033[0m";
 	}
 	cout << endl;
 }

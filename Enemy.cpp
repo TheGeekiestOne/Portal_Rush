@@ -1,10 +1,10 @@
  //Program name: Enemy.cpp
 //Author: Ayran Olckers
 //Date: 20/11/2019
-//Description: Implementation file for the skeleton class. This class contains
-//ints for the xLocation and locationY of the skeleton and a boolean variable to
-//say whether the skeleton has moved. Function descriptions are available
-//in the header file.
+//
+//Description: 
+//Implementation file for the skeleton class. This class contains ints for the xLocation and locationY of the skeleton and a boolean variable to
+//say whether the skeleton has moved. 
 
 #include "Enemy.hpp"
 #include "Player.hpp"
