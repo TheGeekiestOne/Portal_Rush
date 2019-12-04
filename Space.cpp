@@ -1,18 +1,18 @@
-//Program name: Space.cpp
+//Program name: World.cpp
 //Grand Creator: Ayran Olckers
 //Date: 20/11/2019
 //
 //Description: 
-//Implementation file for the Space class. This is the base class for the three space types that appear on the gameBoardLayout. It
-//contains pointers to the North, East, South, and West spaces around the space, boolean and char variables for items, and pointers to
-//player or skeleton objects that may occupy the space. Contains virtual functions to interact, draw, and return the space type. All other
+//Implementation file for the World class. This is the base class for the three tile types that appear on the gameBoardLayout. It
+//contains pointers to the North, East, South, and West tiles around the tile, boolean and char variables for items, and pointers to
+//player or skeleton objects that may occupy the tile. Contains virtual functions to interact, draw, and return the tile type. All other
 //member functions are getters and setters.
 
-#include "Space.hpp"
+#include "World.hpp"
 #include "Player.hpp"
 #include "Enemy.hpp"
 
-Space::Space() {
+World::World() {
 	north = nullptr;
 	east = nullptr;
 	south = nullptr;
@@ -22,68 +22,68 @@ Space::Space() {
 	skeletonInTile = nullptr;
 }
 
-void Space::setNorth(Space* s) {
+void World::setNorth(World* s) {
 	north = s;
 }
 
-Space* Space::getNorth() {
+World* World::getNorth() {
 	return north;
 }
 
-void Space::setEast(Space* s) {
+void World::setEast(World* s) {
 	east = s;
 }
 
-Space* Space::getEast() {
+World* World::getEast() {
 	return east;
 }
 
-void Space::setSouth(Space* s) {
+void World::setSouth(World* s) {
 	south = s;
 }
 
-Space* Space::getSouth() {
+World* World::getSouth() {
 	return south;
 }
 
-void Space::setWest(Space* s) {
+void World::setWest(World* s) {
 	west = s;
 }
 
-Space* Space::getWest() {
+World* World::getWest() {
 	return west;
 }
 
-void Space::setHasItem(bool b) {
+void World::setHasItem(bool b) {
 	hasItem = b;
 }
 
-bool Space::getHasItem() {
+bool World::getHasItem() {
 	return hasItem;
 }
 
-void Space::setItem(char c) {
+void World::setItem(char c) {
 	item = c;
 }
 
-char Space::getItem() {
+char World::getItem() {
 	return item;
 }
 
-void Space::setPlayerInTile(Player* p) {
+void World::setPlayerInTile(Player* p) {
 	playerInTile = p;
 }
 
-Player* Space::getPlayerInTile() {
+Player* World::getPlayerInTile() {
 	return playerInTile;
 }
 
-void Space::setSkeletonInTile(Enemy* a) {
+void World::setSkeletonInTile(Enemy* a) {
 	skeletonInTile = a;
 }
 
-Enemy* Space::getSkeletonInTile() {
+Enemy* World::getSkeletonInTile() {
 	return skeletonInTile;
 }
 
-Space::~Space() {}
+World::~World() {}

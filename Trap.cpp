@@ -3,10 +3,10 @@
 //Date: 20/11/2019
 //
 //Description: 
-//Implementation file for the Trap class. This class derives from the Space class. Interacting with this class involves
+//Implementation file for the Trap class. This class derives from the World class. Interacting with this class involves
 //picking a direction and destroying all skeletons in that direction (provided ammo is remaining in the turret).
 
-#include "Space.hpp"
+#include "World.hpp"
 #include "Trap.hpp"
 #include "Board.hpp"
 #include "InputValidator.hpp"
@@ -25,7 +25,7 @@ void Trap::interact(Player* p, Board* b) {
 	int direction;
 	int skeletonsDestroyed = 0;
 	bool validInt = false;
-	Space* tempSpace = this;
+	World* tempWorld = this;
 
 	if (ammo > 0) {
 		cout << "The turret has " << ammo << " bolts left. Would you like to use it?\n";
@@ -70,58 +70,58 @@ void Trap::interact(Player* p, Board* b) {
 			//delete skeletons depending on direction chosen
 			if (direction == 1) {
 				//loop until the edge of the board is reached
-				while (tempSpace != nullptr) {
+				while (tempWorld != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInTile() != nullptr) {
-						delete tempSpace->getSkeletonInTile();
-						tempSpace->setSkeletonInTile(nullptr);
+					if (tempWorld->getSkeletonInTile() != nullptr) {
+						delete tempWorld->getSkeletonInTile();
+						tempWorld->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
 					//move north
-					tempSpace = tempSpace->getNorth();
+					tempWorld = tempWorld->getNorth();
 				}
 			}
 			else if (direction == 2) {
 				//loop until the edge of the board is reached
-				while (tempSpace != nullptr) {
+				while (tempWorld != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInTile() != nullptr) {
-						delete tempSpace->getSkeletonInTile();
-						tempSpace->setSkeletonInTile(nullptr);
+					if (tempWorld->getSkeletonInTile() != nullptr) {
+						delete tempWorld->getSkeletonInTile();
+						tempWorld->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
 					//move east
-					tempSpace = tempSpace->getEast();
+					tempWorld = tempWorld->getEast();
 				}
 			}
 			else if (direction == 3) {
 				//loop until the edge of the board is reached
-				while (tempSpace != nullptr) {
+				while (tempWorld != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInTile() != nullptr) {
-						delete tempSpace->getSkeletonInTile();
-						tempSpace->setSkeletonInTile(nullptr);
+					if (tempWorld->getSkeletonInTile() != nullptr) {
+						delete tempWorld->getSkeletonInTile();
+						tempWorld->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
 					//move south
-					tempSpace = tempSpace->getSouth();
+					tempWorld = tempWorld->getSouth();
 				}
 			}
 			else if (direction == 4) {
 				//loop until the edge of the board is reached
-				while (tempSpace != nullptr) {
+				while (tempWorld != nullptr) {
 					//delete an skeleton if it exists
-					if (tempSpace->getSkeletonInTile() != nullptr) {
-						delete tempSpace->getSkeletonInTile();
-						tempSpace->setSkeletonInTile(nullptr);
+					if (tempWorld->getSkeletonInTile() != nullptr) {
+						delete tempWorld->getSkeletonInTile();
+						tempWorld->setSkeletonInTile(nullptr);
 						skeletonsDestroyed += 1;
 					}
 
 					//move west
-					tempSpace = tempSpace->getWest();
+					tempWorld = tempWorld->getWest();
 				}
 			}
 
@@ -160,6 +160,6 @@ void Trap::draw() {
 	}
 }
 
-char Trap::getSpaceType() {
+char Trap::getWorldType() {
 	return 't';
 }

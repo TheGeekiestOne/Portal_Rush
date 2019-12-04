@@ -22,7 +22,7 @@ public:
 	//Constructor for the skeleton class. Row locationX and colum locationY values are required to initialize the object. 
 	Enemy(int x, int y);
 
-	//Takes a player as a parameter and moves the skeleton one space closer to the player. Randomly chooses to move up or right if the
+	//Takes a player as a parameter and moves the skeleton one tile closer to the player. Randomly chooses to move up or right if the
 	//player is both up and right of the skeleton on the gameboard, etc.
 	void move(Player& p);
 	 

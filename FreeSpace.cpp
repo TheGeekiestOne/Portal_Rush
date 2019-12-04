@@ -3,10 +3,10 @@
 //Date: 20/11/2019
 //
 //Description: 
-//Header file for the FreeSpace class. This class derives from the Space class. Interacting with this class involves
-//picking up an item if the space contains one, or nothing if the space does not contain an item.
+//Header file for the FreeSpace class. This class derives from the World class. Interacting with this class involves
+//picking up an item if the tile contains one, or nothing if the tile does not contain an item.
 
-#include "Space.hpp"
+#include "World.hpp"
 #include "FreeSpace.hpp"
 #include "InputValidator.hpp"
 #include <iostream>
@@ -163,6 +163,6 @@ void FreeSpace::draw() {
 	}
 }
 
-char FreeSpace::getSpaceType() {
+char FreeSpace::getWorldType() {
 	return 'n';
 }

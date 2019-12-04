@@ -5,10 +5,10 @@
 //Description: 
 //Implementation file for the board class. This class contains integers to hold the number of locationXs, locationYs, portals, turrets,
 //grenades, and ammo on the board. The initial number of skeletons is also set. Step counters and boolean variables to tell if the player has
-//won or lost the game are also available. The board itself is a space triple pointer called gameBoardLayout.
+//won or lost the game are also available. The board itself is a tile triple pointer called gameBoardLayout.
 
 #include "Board.hpp"
-#include "Space.hpp"
+#include "World.hpp"
 #include "Enemy.hpp"
 #include "Player.hpp"
 #include "FreeSpace.hpp"
@@ -37,9 +37,9 @@ Board::Board(Player* p) {
 
 
 	//initialize all of the tiles
-	gameBoardLayout = new Space * *[numRowsX];
+	gameBoardLayout = new World * *[numRowsX];
 	for (int i = 0; i < numRowsX; i++) {
-		gameBoardLayout[i] = new Space * [numColsY];
+		gameBoardLayout[i] = new World * [numColsY];
 	}
 
 	//set the tiles equal to null
@@ -121,7 +121,7 @@ Board::Board(Player* p) {
 				gameBoardLayout[i][j]->setWest(gameBoardLayout[i][j - 1]);
 			}
 
-			//all interior spaces
+			//all interior tiles
 			else {
 				gameBoardLayout[i][j]->setNorth(gameBoardLayout[i - 1][j]);
 				gameBoardLayout[i][j]->setEast(gameBoardLayout[i][j + 1]);
@@ -153,27 +153,27 @@ Board::Board(Player* p) {
 
 //place the portals on the tiles
 void Board::placePortal() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
 			if (gameBoardLayout[i][j] == nullptr) {
-				eligibleSpaces += 1;
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
 				if (gameBoardLayout[i][j] == nullptr) {
-					tempSpace += 1;
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						gameBoardLayout[i][j] = new Portal;
 					}
 				}
@@ -184,27 +184,27 @@ void Board::placePortal() {
 
 //place the traps/turrets to the tiles
 void Board::placeTrap() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
 			if (gameBoardLayout[i][j] == nullptr) {
-				eligibleSpaces += 1;
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
 				if (gameBoardLayout[i][j] == nullptr) {
-					tempSpace += 1;
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						gameBoardLayout[i][j] = new Trap;
 					}
 				}
@@ -215,27 +215,27 @@ void Board::placeTrap() {
 
 //place pickeup grenade to rand tiles
 void Board::placeGrenades() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-				eligibleSpaces += 1;
+			if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-					tempSpace += 1;
+				if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						gameBoardLayout[i][j]->setHasItem(true);
 						gameBoardLayout[i][j]->setItem('b');
 					}
@@ -274,27 +274,27 @@ void Board::useGrenade(int x, int y) {
 
 //place ammo randomly on the tiles
 void Board::placeAmmo() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-				eligibleSpaces += 1;
+			if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-					tempSpace += 1;
+				if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						gameBoardLayout[i][j]->setHasItem(true);
 						gameBoardLayout[i][j]->setItem('a');
 					}
@@ -306,27 +306,27 @@ void Board::placeAmmo() {
 
 //place the orba at a random location
 void Board::placeOrb() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
-			if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-				eligibleSpaces += 1;
+			if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
-				if (gameBoardLayout[i][j]->getSpaceType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
-					tempSpace += 1;
+				if (gameBoardLayout[i][j]->getWorldType() == 'n' && gameBoardLayout[i][j]->getHasItem() == false) {
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						gameBoardLayout[i][j]->setHasItem(true);
 						gameBoardLayout[i][j]->setItem('r');
 					}
@@ -338,27 +338,27 @@ void Board::placeOrb() {
 
 //place enemies at random locations
 void Board::placeSkeleton() {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
 			if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getPlayerInTile() == nullptr) {
-				eligibleSpaces += 1;
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 0; i < numRowsX; i++) {
 			for (int j = 0; j < numColsY; j++) {
 				if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getPlayerInTile() == nullptr) {
-					tempSpace += 1;
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						Enemy* tempSkeleton = new Enemy(i, j);
 						gameBoardLayout[i][j]->setSkeletonInTile(tempSkeleton);
 					}
@@ -385,7 +385,7 @@ void Board::moveSkeletons(Player* p) {
 					alreadyOccupied = true;
 				}
 
-				//If it didn't, move the tempSkeleton to the new space, set old space skeleton pointer to null
+				//If it didn't, move the tempSkeleton to the new tile, set old tile skeleton pointer to null
 				if (alreadyOccupied == false) {
 					gameBoardLayout[tempXLocation][tempYLocation]->setSkeletonInTile(tempSkeleton);
 					gameBoardLayout[i][j]->setSkeletonInTile(nullptr);
@@ -411,30 +411,30 @@ void Board::moveSkeletons(Player* p) {
 }
 
 void Board::placePlayer(Player* p) {
-	int eligibleSpaces = 0;
-	int chosenSpace;
-	int tempSpace = 0;
+	int eligibleWorlds = 0;
+	int chosenWorld;
+	int tempWorld = 0;
 
-	//loop through the interior spaces, find one that is not on or adjacent to an skeleton
+	//loop through the interior tiles, find one that is not on or adjacent to an skeleton
 	for (int i = 1; i < numRowsX - 1; i++) {
 		for (int j = 1; j < numColsY - 1; j++) {
 			if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getNorth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getEast()->getSkeletonInTile() == nullptr
 				&& gameBoardLayout[i][j]->getSouth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getWest()->getSkeletonInTile() == nullptr) {
-				eligibleSpaces += 1;
+				eligibleWorlds += 1;
 			}
 		}
 	}
 
-	if (eligibleSpaces > 0) {
-		chosenSpace = rand() % eligibleSpaces + 1;
+	if (eligibleWorlds > 0) {
+		chosenWorld = rand() % eligibleWorlds + 1;
 
 		for (int i = 1; i < numRowsX - 1; i++) {
 			for (int j = 1; j < numColsY - 1; j++) {
 				if (gameBoardLayout[i][j]->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getNorth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getEast()->getSkeletonInTile() == nullptr
 					&& gameBoardLayout[i][j]->getSouth()->getSkeletonInTile() == nullptr && gameBoardLayout[i][j]->getWest()->getSkeletonInTile() == nullptr) {
-					tempSpace += 1;
+					tempWorld += 1;
 
-					if (tempSpace == chosenSpace) {
+					if (tempWorld == chosenWorld) {
 						//special case if this is the first time the player is being placed (not from portal)
 						if (p->getYLocation() == -1 && p->getXLocation() == -1) {
 							p->setXLocation(i);
@@ -456,10 +456,10 @@ void Board::placePlayer(Player* p) {
 
 	else {
 		if (p->getYLocation() == -1 && p->getXLocation() == -1) {
-			cout << "Error - invalid input conditions. No safe space to place player object to begin game.\n";
+			cout << "Error - invalid input conditions. No safe tile to place player object to begin game.\n";
 		}
 		else {
-			cout << "Error - portal could not find a safe space to place the player. Shutting down portal.\n";
+			cout << "Error - portal could not find a safe tile to place the player. Shutting down portal.\n";
 		}
 	}
 }
@@ -526,7 +526,7 @@ void Board::movePlayer(Player* p) {
 	}
 }
 
-Space* Board::getPlayerSpace() {
+World* Board::getPlayerWorld() {
 
 	for (int i = 0; i < numRowsX; i++) {
 		for (int j = 0; j < numColsY; j++) {
@@ -536,7 +536,7 @@ Space* Board::getPlayerSpace() {
 		}
 	}
 
-	cout << "Error in Board::getPlayerSpace() - could not find space with not null player pointer.\n";
+	cout << "Error in Board::getPlayerWorld() - could not find tile with not null player pointer.\n";
 	return nullptr;
 }
 
@@ -584,7 +584,7 @@ void Board::printBoard() {
 	}
 	cout << endl;
 
-	//draw edges and interior spaces
+	//draw edges and interior tiles
 	for (int i = 0; i < numRowsX; i++) {
 		cout << "\x1B[93m|\033[0m";
 		for (int j = 0; j < numColsY; j++) {

@@ -3,10 +3,10 @@
 //Date: 20/11/2019
 //
 //Description: 
-//Header file for the Portal class. This class derives from the Space class. Interacting with this class involves
-//asking the player if they would like to activate the portal. If they do, they are randomly placed on a space with no adjacent skeletons.
+//Header file for the Portal class. This class derives from the World class. Interacting with this class involves
+//asking the player if they would like to activate the portal. If they do, they are randomly placed on a tile with no adjacent skeletons.
 
-#include "Space.hpp"
+#include "World.hpp"
 #include "Portal.hpp"
 #include "Board.hpp"
 #include "InputValidator.hpp"
@@ -59,6 +59,6 @@ void Portal::draw() {
 	}
 }
 
-char Portal::getSpaceType() {
+char Portal::getWorldType() {
 	return 'w';
 }

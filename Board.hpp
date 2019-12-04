@@ -5,17 +5,17 @@
 //Description: 
 //Header file for the board class. This class contains integers to hold the number of locationXs, locationYs, portals, turrets,
 //grenades, and ammo on the board. The initial number of skeletons is also set. Step counters and boolean variables to tell if the player has
-//won or lost the game are also available. The board itself is a space triple pointer called gameBoardLayout.
+//won or lost the game are also available. The board itself is a tile triple pointer called gameBoardLayout.
 
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
-#include "Space.hpp"
+#include "World.hpp"
 #include "Player.hpp"
 
 class Board {
 private:
-	Space*** gameBoardLayout;
+	World*** gameBoardLayout;
 	int numRowsX;
 	int numColsY;
 	int numPortals;
@@ -60,11 +60,11 @@ public:
 	//each skeleton moves only once. The player object parameter must be passed for each skeleton move call.
 	void moveSkeletons(Player* p);
 
-	//Randomly places the passed player object on a board space with no adjacent skeletons. Prints an error message if this is not possible.
+	//Randomly places the passed player object on a board tile with no adjacent skeletons. Prints an error message if this is not possible.
 	//Used for both gameBoardLayout initialization and portal interaction.
 	void placePlayer(Player* p);
 
-	//Gets and validates a direction to move the player. Changes the playerInTile member variable of the space being pointed to the
+	//Gets and validates a direction to move the player. Changes the playerInTile member variable of the tile being pointed to the
 	//player based on the desired direction.
 	void movePlayer(Player* p);
 
@@ -75,7 +75,7 @@ public:
 	void reduceStepsWin();
 
 	//Getters
-	Space* getPlayerSpace();
+	World* getPlayerWorld();
 
 	int getStepsLose();
 
@@ -85,10 +85,10 @@ public:
 
 	bool getHasLost();
 
-	//Calls the interact function of the space the player is situated on
+	//Calls the interact function of the tile the player is situated on
 	void interact(int x, int y, Player* p);
 
-	//Loops through the board, calling the draw function for each space pointed to by the gameBoardLayout.
+	//Loops through the board, calling the draw function for each tile pointed to by the gameBoardLayout.
 	void printBoard();
 
 	//Board destructor. Deletes all dynamic memory.

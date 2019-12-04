@@ -16,7 +16,7 @@
  
 #include "Enemy.hpp"		
 #include "Player.hpp"
-#include "Space.hpp"
+#include "World.hpp"
 #include "FreeSpace.hpp"
 #include "Portal.hpp"
 #include "Trap.hpp"

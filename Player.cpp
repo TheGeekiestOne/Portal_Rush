@@ -10,7 +10,7 @@
 #include "Player.hpp"
 #include "InputValidator.hpp"
 #include "Board.hpp"
-#include "Space.hpp"
+#include "World.hpp"
 #include <vector>
 #include <iostream>
 
@@ -169,7 +169,7 @@ void Player::useBow(Board& b) {
 	int direction;
 	bool skeletonDestroyed = false;
 	bool validInt = false;
-	Space* tempSpace = b.getPlayerSpace();
+	World* tempWorld = b.getPlayerWorld();
 
 	//remove 1 ammo
 	this->discardAmmo();
@@ -197,58 +197,58 @@ void Player::useBow(Board& b) {
 	//delete skeletons depending on direction chosen
 	if (direction == 1) {
 		//loop until the edge of the board is reached, or skeleton is destroyed
-		while (tempSpace != nullptr && skeletonDestroyed == false) {
+		while (tempWorld != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInTile() != nullptr) {
-				delete tempSpace->getSkeletonInTile();
-				tempSpace->setSkeletonInTile(nullptr);
+			if (tempWorld->getSkeletonInTile() != nullptr) {
+				delete tempWorld->getSkeletonInTile();
+				tempWorld->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
 			//move north
-			tempSpace = tempSpace->getNorth();
+			tempWorld = tempWorld->getNorth();
 		}
 	}
 	else if (direction == 2) {
 		//loop until the edge of the board is reached
-		while (tempSpace != nullptr && skeletonDestroyed == false) {
+		while (tempWorld != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInTile() != nullptr) {
-				delete tempSpace->getSkeletonInTile();
-				tempSpace->setSkeletonInTile(nullptr);
+			if (tempWorld->getSkeletonInTile() != nullptr) {
+				delete tempWorld->getSkeletonInTile();
+				tempWorld->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
 			//move east
-			tempSpace = tempSpace->getEast();
+			tempWorld = tempWorld->getEast();
 		}
 	}
 	else if (direction == 3) {
 		//loop until the edge of the board is reached
-		while (tempSpace != nullptr && skeletonDestroyed == false) {
+		while (tempWorld != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInTile() != nullptr) {
-				delete tempSpace->getSkeletonInTile();
-				tempSpace->setSkeletonInTile(nullptr);
+			if (tempWorld->getSkeletonInTile() != nullptr) {
+				delete tempWorld->getSkeletonInTile();
+				tempWorld->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
 			//move south
-			tempSpace = tempSpace->getSouth();
+			tempWorld = tempWorld->getSouth();
 		}
 	}
 	else if (direction == 4) {
 		//loop until the edge of the board is reached
-		while (tempSpace != nullptr && skeletonDestroyed == false) {
+		while (tempWorld != nullptr && skeletonDestroyed == false) {
 			//delete an skeleton if it exists
-			if (tempSpace->getSkeletonInTile() != nullptr) {
-				delete tempSpace->getSkeletonInTile();
-				tempSpace->setSkeletonInTile(nullptr);
+			if (tempWorld->getSkeletonInTile() != nullptr) {
+				delete tempWorld->getSkeletonInTile();
+				tempWorld->setSkeletonInTile(nullptr);
 				skeletonDestroyed = true;
 			}
 
 			//move west
-			tempSpace = tempSpace->getWest();
+			tempWorld = tempWorld->getWest();
 		}
 	}
 
